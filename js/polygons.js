@@ -7,7 +7,7 @@ map.on('load', () => {
    
   // add a new layer to visualize the polygons
   map.addLayer({
-    'id': 'sample',
+    'id': 'sample_fields',
     'type': 'fill',
     'source': 'fields', 
     'layout': {},
@@ -45,7 +45,7 @@ map.on('load', () => {
   });
   
   // display popup on hover
-  map.on('mouseenter', 'fields', (e) => {
+  map.on('mouseenter', 'sample_fields', (e) => {
     // change the cursor style as a UI indicator.
     map.getCanvas().style.cursor = 'pointer';
     
@@ -62,8 +62,8 @@ map.on('load', () => {
     popup.setLngLat(coordinates).setHTML(id).addTo(map);
   });
     
-  // remove popup
-  map.on('mouseleave', 'fields', () => {
+  // dismiss popup if mouse leaves polygon
+  map.on('mouseleave', 'sample_fields', () => {
     map.getCanvas().style.cursor = '';
     popup.remove();
   });
