@@ -12,4 +12,5 @@ map.on("zoomend", function () {
       // close use satellite view
       map.setStyle("mapbox://styles/mapbox/dark-v10");
   }
+
 });

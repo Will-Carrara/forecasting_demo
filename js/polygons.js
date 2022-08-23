@@ -1,22 +1,23 @@
+// add custom geojson
 map.on('load', () => {
   map.addSource('fields', {
     type: 'geojson',
-    data: 'data/fields.geojson'
+    data: 'https://raw.githubusercontent.com/Will-Carrara/forecasting_demo/main/data/fields.geojson'
   });
    
-  // Add a new layer to visualize the polygon.
+  // add a new layer to visualize the polygons
   map.addLayer({
     'id': 'fields',
     'type': 'fill',
-    'source': 'fields', // reference the data source
+    'source': 'fields', 
     'layout': {},
     'paint': {
-      'fill-color': '#0080ff', // blue color fill
+      'fill-color': '#0080ff',
       'fill-opacity': 0.5
     }
   });
 
-  // Add a black outline around the polygons
+  // add a black outline around the polygons
   map.addLayer({
     'id': 'outline',
     'type': 'line',
@@ -26,5 +27,35 @@ map.on('load', () => {
       'line-color': '#000',
       'line-width': 3
     }
+  });
+
+  // create a popup, but don't add it to the map yet
+  const popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+  
+  // display popup on hover
+  map.on('mouseenter', 'fields', (e) => {
+    // change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+    
+    // copy coordinates array
+    const coordinates = turf.center(e.features[0]).geometry.coordinates
+    const id = e.features[0].properties.id;
+    
+    // ensure that if the map is zoomed out such that multiple copies of the feature are visible
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+    
+    // populate the popup and set its coordinates
+    popup.setLngLat(coordinates).setHTML(id).addTo(map);
+  });
+    
+  // remove popup
+  map.on('mouseleave', 'fields', () => {
+    map.getCanvas().style.cursor = '';
+    popup.remove();
   });
 });

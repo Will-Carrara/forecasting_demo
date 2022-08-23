@@ -3,12 +3,15 @@
   <head>
     <!-- Site Title -->
     <title>Forecasting Demo</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 
     <!-- Map Imports -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css" type="text/css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
     <!-- Area Calculations -->
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
@@ -27,12 +30,21 @@
       // base map
       var map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/dark-v10",
+        //style: "mapbox://styles/mapbox/dark-v10",
+        style: "mapbox://styles/mapbox/satellite-streets-v11",
         center: [-120.393, 36.937],
         zoom: 5,
         maxZoom: 15,
         minZoom: 5,
       });
+
+      // add search bar
+      map.addControl(
+        new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl
+        }),
+      'top-left');
 
       // add layer controls
       map.addControl(new mapboxgl.NavigationControl());
@@ -40,7 +52,7 @@
 
     <!-- Map Functions -->
     <script src="js/draw.js"></script>
-    <script src="js/zoom.js"></script>
+    <!-- <script src="js/zoom.js"></script> -->
     <script src="js/polygons.js"></script>
 
   </body>
