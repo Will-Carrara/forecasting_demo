@@ -19,9 +19,9 @@ function updateArea(e) {
   /* Calculate the area of a drawn polygon in acres*/
   const data = draw.getAll();
 
-  // check if polygon is drawn
+  // check if polygon exists
   if (data.features.length > 0) {
-    // m2 to acres
+    // convert m2 to acres
     const area = turf.area(data) * 0.000247105;
 
     // restrict the area to 2 decimal points.
