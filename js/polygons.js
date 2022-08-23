@@ -7,13 +7,22 @@ map.on('load', () => {
    
   // add a new layer to visualize the polygons
   map.addLayer({
-    'id': 'fields',
+    'id': 'sample',
     'type': 'fill',
     'source': 'fields', 
     'layout': {},
     'paint': {
-      'fill-color': '#0080ff',
-      'fill-opacity': 0.5
+      'fill-color': [
+        'interpolate',
+        ['linear'],
+        ['get', 'et'],
+        0, '#9f6212',
+        240, '#dddd45',
+        540, '#70bd59',
+        840, '#4dc1a2',
+        1200, '#2b3f65'
+      ],
+      'fill-opacity': 0.75
     }
   });
 

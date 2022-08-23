@@ -48,6 +48,9 @@
 
       // add layer controls
       map.addControl(new mapboxgl.NavigationControl());
+      
+      // display scale ruler
+      map.addControl(new mapboxgl.ScaleControl({position: 'bottom-left', unit: 'metric'}));
     </script>
 
     <!-- Map Functions -->

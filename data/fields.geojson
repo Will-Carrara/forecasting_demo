@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": {"id": 1},
+      "properties": {"id": 1, "et" : 1059},
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -38,7 +38,7 @@
     },
     {
       "type": "Feature",
-      "properties": {"id": 2},
+      "properties": {"id": 2, "et" : 381},
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -77,7 +77,7 @@
     },
     {
       "type": "Feature",
-      "properties": {"id": 3},
+      "properties": {"id": 3, "et" : 920},
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -108,7 +108,7 @@
     },
     {
       "type": "Feature",
-      "properties": {"id": 4},
+      "properties": {"id": 4, "et" : 547},
       "geometry": {
         "type": "Polygon",
         "coordinates": [

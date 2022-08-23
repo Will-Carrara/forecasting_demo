@@ -1,11 +1,28 @@
+/* body layout*/
 body {
     margin: 0;
     padding: 0;
   }
 
+/* map position*/
 #map {
     position: absolute;
     top: 0;
     bottom: 0;
     width: 100%;
+}
+
+/* remove mapbox logo*/
+.mapboxgl-ctrl-logo {
+  display: none !important;
+}
+
+/* remove mapbox improve map text*/
+.mapbox-improve-map {
+  display: none;
+}
+
+/* remove mapbox watermark text*/
+.mapboxgl-ctrl-bottom-right {
+  display: none;
 }
