@@ -47,14 +47,16 @@ function callApi(e) {
   const coordinates = turf.center(e.features[0]).geometry.coordinates
   console.log(coordinates)
 
-  const url = "https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-08-10&interval=monthly&lon=-120.34557095073147&lat=37.543664330429905&model=ensemble&variable=et&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello"
-  const Http = new XMLHttpRequest();
-  Http.open("GET", url);
-  Http.send();
-  Http.onreadystatechange=(e)=>{
-    console.log(Http.responseText)
-  }
+  $.ajax({
+    type: "POST",
+    url: "api.py",
+    data: { param: coordinates}
+  }).done(function( o ) {
+    console.log(o)
+  });
 
+  //const url = "https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-08-10&interval=monthly&lon=-120.34557095073147&lat=37.543664330429905&model=ensemble&variable=et&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello"
+  
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
 
