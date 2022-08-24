@@ -59,7 +59,7 @@ map.on('load', () => {
     }
     
     // populate the popup and set its coordinates
-    popup.setLngLat(coordinates).setHTML(id).addTo(map);
+    popup.setLngLat(coordinates).setHTML("Field ID: " + id).addTo(map);
   });
     
   // dismiss popup if mouse leaves polygon
