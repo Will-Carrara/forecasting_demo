@@ -37,26 +37,40 @@ function updateArea(e) {
       .setLngLat(coordinates)
       .setHTML(rounded_area + " acres")
       .addTo(map);
-  }
-}
+  };
+};
 
 function callApi(e) {
   /* Trigger modal popup and call api*/
 
   // center of polygon 
-  const coordinates = turf.center(e.features[0]).geometry.coordinates
-  console.log(coordinates)
+  const coordinates = turf.center(e.features[0]).geometry.coordinates;
+  const lon = coordinates[0];
+  const lat = coordinates[1];
 
-  $.ajax({
-    type: "POST",
-    url: "api.py",
-    data: { param: coordinates}
-  }).done(function( o ) {
-    console.log(o)
-  });
+  // request url 
+  const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-01-02&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=et&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello`;
 
-  //const url = "https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-08-10&interval=monthly&lon=-120.34557095073147&lat=37.543664330429905&model=ensemble&variable=et&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello"
+  // make api request
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
+      return response.json();
+    })
+    .then((myJson) => {
+      // Populate series
+      var timeseries = new Array();
+      for (i = 0; i < myJson.length; i++) {
+        timeseries.push(myJson[i].et);
+      }
+
+      // plot the data
+      var chart = plotData(timeseries, 'ET')
+    });
   
+  // display the modal popup with the graph
   var modal = document.getElementById("myModal");
   modal.style.display = "block";
 
@@ -64,8 +78,8 @@ function callApi(e) {
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
-    }
-  }
-
-}
+      //chart.destroy()
+    };
+  };
+};
 

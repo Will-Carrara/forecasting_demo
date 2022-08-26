@@ -1,30 +1,39 @@
-Highcharts.chart('container', {
-    title: {
-        text: 'ET Forecast'
-    },
-    subtitle: {
-        text: 'Subtitle text'
-    },
-    credits: {
-        enabled: false
-    },
-    yAxis: {
-        title: {
-            text: 'ET (mm)'
+function plotData(timeseries, variable) {
+    var chart = new Highcharts.chart({
+        chart: {
+          renderTo: 'container1',
         },
-        max: 200
-    },
-    xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    },
-    series: [{
-        name: 'ET',
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 190.4, 192.1, 95.6, 54.4],
-        zoneAxis: 'x',
-        zones: [{
+        title: {
+          text: 'Evapotranspiration'
+        },
+        subtitle: {
+          text: '2022 Forecast'
+        },
+        credits: {
+          enabled: false
+        },
+        yAxis: {
+          title: {
+            text: `${variable} (mm)`
+          },
+          max: 200,
+          min: 0
+        },
+        xAxis: {
+          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        series: [{
+          name: 'ET',
+          data: timeseries,
+          zoneAxis: 'x',
+          zones: [{
             value: 8
-        }, {
+          }, {
             dashStyle: 'dot'
+            }]
         }]
-    }]
-});
+      });
+
+    return chart 
+}
+

@@ -12,7 +12,7 @@ def call_warp():
     """
 
     # initialize request url
-    url = 'https://openet-raster-api.org/experimental/forecast/warping'
+    url = 'http://127.0.0.1:8000/experimental/forecast/warping'
 
     # create header
     header = {"admin_key": "hello"}

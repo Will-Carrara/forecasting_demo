@@ -35,9 +35,9 @@
 }
 
 /* High Charts Graph */
-#container {
+#container1 {
     height: 534px;
-    width: 950px;
+    width: 1200px;
 }
 
 .highcharts-menu-item{
