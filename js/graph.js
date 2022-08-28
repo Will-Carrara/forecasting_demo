@@ -1,13 +1,13 @@
-function plotData(timeseries, variable) {
+function plotData(timeseries, range, variable) {
     var chart = new Highcharts.chart({
         chart: {
           renderTo: 'container1',
         },
         title: {
-          text: 'Evapotranspiration'
+          text: 'Evapotranspiration Forecast'
         },
         subtitle: {
-          text: '2022 Forecast'
+          text: 'Source: OpenET Ensemble'
         },
         credits: {
           enabled: false
@@ -16,7 +16,7 @@ function plotData(timeseries, variable) {
           title: {
             text: `${variable} (mm)`
           },
-          max: 200,
+          max: 220,
           min: 0
         },
         xAxis: {
@@ -31,9 +31,19 @@ function plotData(timeseries, variable) {
           }, {
             dashStyle: 'dot'
             }]
-        }]
-      });
-
+        },
+        {
+        name: 'Range',
+        data: range,
+        type: 'arearange',
+        lineWidth: 0,
+        linkedTo: ':previous',
+        color: '#BEBEBE', // light grey 
+        fillOpacity: 0.3,
+        zIndex: 0,
+        marker: {enabled: false}
+        }
+    ]});
     return chart 
 }
 

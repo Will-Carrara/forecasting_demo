@@ -48,30 +48,45 @@ function callApi(e) {
   const lon = coordinates[0];
   const lat = coordinates[1];
 
+  // variable of interest 
+  const variable = 'et'
+
   // request url 
-  const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-01-02&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=et&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello`;
+  const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=2022-01-02&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&moving_average=0&output_file_format=json&admin_key=hello`;
 
   // make api request
   fetch(url)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not OK');
+        throw new Error('Error in Network Response');
       }
       return response.json();
     })
-    .then((myJson) => {
-      // Populate series
+    .then((result) => {
+      // populate series
       var timeseries = new Array();
-      for (i = 0; i < myJson.length; i++) {
-        timeseries.push(myJson[i].et);
+      for (i = 0; i < result.length; i++) {
+        timeseries.push(result[i].et);
       }
+    
+    // range calculation
+    var range = new Array();
+    for (i = 0; i < timeseries.length; i++) {
+      if (i < 8) {
+        range.push([null, null]);
+      } else if (i == 8) {
+        range.push([parseInt(timeseries[i]*1), parseInt(timeseries[i]*1)]);
+      }else {
+        range.push([parseInt(timeseries[i]*.7), parseInt(timeseries[i]*1.3)]);
+      }
+    }
 
-      // plot the data
-      var chart = plotData(timeseries, 'ET')
+    // plot the data
+    var chart = plotData(timeseries, range, 'ET')
     });
   
   // display the modal popup with the graph
-  var modal = document.getElementById("myModal");
+  var modal = document.getElementById("graphModal");
   modal.style.display = "block";
 
   // when the user clicks anywhere outside of the modal, close it
