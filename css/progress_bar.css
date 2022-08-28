@@ -1,0 +1,22 @@
+#Progress_Status {
+    width: 50%;
+    border-radius: 10px;
+    background-color: #ddd;
+    /* Makes cenetered */
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+#myprogressBar {
+    width: 1%;
+    height: 25px;
+    border-radius: 8px;
+    background-color: #7bb5ec;
+    text-align: center;
+    line-height: 32px;
+    color: black;
+}
+    
+    

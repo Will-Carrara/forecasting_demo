@@ -83,12 +83,11 @@ function callApi(e) {
 
     // plot the data
     var chart = plotData(timeseries, range, 'ET')
-
     // when the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
-        chart.destroy()
+        chart.destroy();
       };
     };
   });
@@ -96,5 +95,6 @@ function callApi(e) {
   // display the modal popup with the graph
   var modal = document.getElementById("graphModal");
   modal.style.display = "block";
+  update_bar();
 };
 

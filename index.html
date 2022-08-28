@@ -23,7 +23,6 @@
     <!-- API Handeling -->
     
     <!-- Loading Bar -->
-    <script src="progress_bar.js"></script>
     <link rel="stylesheet" href="css/progress_bar.css" />
 
     <!-- Map Styling -->
@@ -38,13 +37,15 @@
     <!-- Map -->
     <div id="map"></div>
 
-    <!-- The Modal -->
+    <!-- Modal Popup-->
     <div id="graphModal" class="modal">
-      <!-- Modal content -->
       <div class="modal-content" >
-        <div id="container1">
-              <!-- ADD Loading Bar -->          
-        </div>
+        <!-- Loading Bar -->    
+        <div id="Progress_Status">
+          <div id="myprogressBar"></div>
+        </div>  
+          <!-- Graph-->
+          <div id="container1"></div>
       </div>
     </div>
 
@@ -79,11 +80,11 @@
     </script>
 
     <!-- Map Functions -->
-    <script type="text/javascript" src="js/draw.js"></script>
     <script type="text/javascript" src="js/zoom.js"></script>
+    <script type="text/javascript" src="js/draw.js"></script>
     <!-- <script type="text/javascript" src="js/polygons.js"></script> -->
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/graph.js"></script>
-    
+    <script type="text/javascript" src="js/progress.js"></script>
   </body>
 </html>
