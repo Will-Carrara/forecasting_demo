@@ -21,7 +21,7 @@
     transform: translate(-50%, -50%);
     background-color: #fefefe;
     margin: auto;
-    padding: 25px;
+    padding: 8px;
     border: 1px solid #888;
     /*width: 50%;*/
     border-radius: 18px !important; 
@@ -38,6 +38,9 @@
 #container1 {
     height: 534px;
     width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .highcharts-menu-item{
