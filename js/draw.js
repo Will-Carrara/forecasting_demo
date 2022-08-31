@@ -10,43 +10,24 @@ const draw = new MapboxDraw({
 // add control tools
 map.addControl(draw);
 
-// update area 
-map.on("draw.create", updateArea);
-map.on("draw.delete", updateArea);
-map.on("draw.update", updateArea);
-
 // call api
 map.on("draw.create", callApi);
+map.on("draw.delete", null);
 map.on("draw.update", callApi);
-
-function updateArea(e) {
-  /* Calculate the area of a drawn polygon in acres*/
-  const data = draw.getAll();
-
-  // check if polygon exists
-  if (data.features.length > 0) {
-    // convert m2 to acres
-    const area = turf.area(data) * 0.000247105;
-
-    // restrict the area to 2 decimal points
-    const rounded_area = Math.round(area * 100) / 100;
-
-    // add popup to display area
-    var coordinates = e.features[0].geometry.coordinates[0][0];
-    new mapboxgl.Popup({ closeOnClick: false, closeOnMove: true })
-      .setLngLat(coordinates)
-      .setHTML(rounded_area + " acres")
-      .addTo(map);
-  };
-};
 
 function callApi(e) {
   /* Trigger modal popup and call api*/
 
-  // center of polygon 
-  const coordinates = turf.center(e.features[0]).geometry.coordinates;
-  const lon = coordinates[0];
-  const lat = coordinates[1];
+  // polygon
+  const polygon = e.features[0]
+
+  // calculate geometric center
+  const coordinates = turf.center(polygon).geometry.coordinates;
+  let lon = coordinates[0];
+  let lat = coordinates[1];
+
+  // convert m2 to acres
+  let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
   // variable of interest 
   const variable = 'et'
@@ -76,13 +57,13 @@ function callApi(e) {
         range.push([null, null]);
       } else if (i == 8) {
         range.push([parseInt(timeseries[i]*1), parseInt(timeseries[i]*1)]);
-      }else {
+      } else {
         range.push([parseInt(timeseries[i]*.7), parseInt(timeseries[i]*1.3)]);
-      }
-    }
+      };
+    };
 
     // plot the data
-    var chart = plotData(timeseries, range, 'ET')
+    var chart = plotData(timeseries, range, area, 'ET')
     // when the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
@@ -92,7 +73,7 @@ function callApi(e) {
     };
   });
   
-  // display the modal popup with the graph
+  // display the modal popup with the graph and loader
   var modal = document.getElementById("graphModal");
   modal.style.display = "block";
   update_bar();

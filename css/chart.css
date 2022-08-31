@@ -32,7 +32,6 @@
     cursor: pointer;
 }
 
-
 /* High Charts Graph */
 #container1 {
     height: 534px;
@@ -40,7 +39,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .highcharts-menu-item{

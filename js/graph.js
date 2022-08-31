@@ -1,4 +1,4 @@
-function plotData(timeseries, range, variable) {
+function plotData(timeseries, range, area, variable) {
     var chart = new Highcharts.chart({
         chart: {
           renderTo: 'container1',
@@ -7,7 +7,7 @@ function plotData(timeseries, range, variable) {
           text: 'Evapotranspiration Forecast'
         },
         subtitle: {
-          text: 'Source: OpenET Ensemble'
+          text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`
         },
         credits: {
           enabled: false

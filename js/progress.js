@@ -12,3 +12,4 @@ function update_bar() {
     }
 }
 
+

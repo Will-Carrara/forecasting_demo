@@ -5,7 +5,7 @@ map.on("zoomend", function () {
   // current zoom level
   var zoom = map.getZoom();
 
-  if (zoom > 11) {
+  if (zoom > 8) {
       // far away use dark map
       map.setStyle("mapbox://styles/mapbox/satellite-streets-v11");
   } else {
