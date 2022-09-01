@@ -32,14 +32,14 @@ body {
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: white;
+  background-color: #51555F;
   overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   float: left;
-  color: black;
+  color: white;
   text-align: center;
   padding: 15px 15px;
   text-decoration: none;
