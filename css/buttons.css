@@ -6,23 +6,26 @@
     text-align: center;
     cursor: pointer;
     display: inline-block;
-    border-radius: 20px
-  }
-  
+    border-radius: 20px;
+    z-index: 1;
+}
+
 /* populate map button */
 .button1 {
     color: white;
     padding: 15px 25px;
     position: absolute;
-    right:    10px;
-    bottom:   10px;
+    right: 20px;
+    bottom: 20px;
     background-color: #7bb5ec;
-} 
+}
 
+/* populate map button hover effect */
 .button1:hover {
     animation: shake3856 0.3s linear infinite both;
 }
 
+/* hover animation */
 @keyframes shake3856 {
     0% {
         -webkit-transform: translate(0);
@@ -54,4 +57,3 @@
         transform: translate(0);
     }
 }
-   

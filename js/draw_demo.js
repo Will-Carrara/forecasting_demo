@@ -32,26 +32,26 @@ function generateGraph(e) {
   //const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-08-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
 
   async function makeAPICalls(variable, year, start) {
-    // request url for ground truth
-    const url = `https://openet-raster-api.org/timeseries/point?start_date=${year}-01-01&end_date=${year}-12-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&provisional=true&admin_key=hello`;
-    const truth = await requestAPI(url, variable);
+      // request url for ground truth
+      const url = `https://openet-raster-api.org/timeseries/point?start_date=${year}-01-01&end_date=${year}-12-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&provisional=true&admin_key=hello`;
+      const truth = await requestAPI(url, variable);
 
-    // request url  for forecast
-    const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-08-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
-    const forecast = await requestAPI(url2, variable);
+      // request url  for forecast
+      const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-08-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
+      const forecast = await requestAPI(url2, variable);
 
-    // plot the data
-    var chart = plotAccuracy(truth, forecast, area, 'ET', start)
+      // plot the data
+      var chart = plotAccuracy(truth, forecast, area, 'ET', start)
 
-    // when the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-        chart.destroy();
+      // when the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+              chart.destroy();
+          };
       };
-    };
   }
-  
+
   // retirve and plot data
   makeAPICalls(variable, year, start)
 

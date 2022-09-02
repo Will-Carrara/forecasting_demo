@@ -1,5 +1,5 @@
 // event listener for zooming
-map.on("zoomend", function () {
+map.on("zoomend", function() {
   /* Change layers based on current zoom level */
 
   // current zoom level
