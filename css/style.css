@@ -9,7 +9,7 @@ body {
 
 /* map position */
 #map {
-  margin-top: calc(var(--header-height));
+  /*margin-top: calc(var(--header-height));*/
   margin-bottom: 0px;
   position: absolute;
   top: 0;
@@ -35,13 +35,13 @@ body {
 
 /* Mapbox Tools */
 .mapboxgl-ctrl-geocoder {
-  margin-top: 30px !important;
+  margin-top: 20px !important;
   margin-left: 20px !important;
   position: relative !important;
 }
 
 .mapboxgl-ctrl-group {
-  margin-top: 30px !important;
+  margin-top: 20px !important;
   margin-right: 80px !important;
   z-index: 1 !important;
   position: relative !important;
