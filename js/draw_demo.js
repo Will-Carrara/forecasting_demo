@@ -21,12 +21,11 @@ function generateGraph(e) {
   // convert m2 to acres
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
-  // variable of interest 
-  const variable = 'et'
-  const year = '2021'
-
+  // variables of interest 
+  var variable = 'eto'
+  var year = '2021'
   var date = new Date();
-  let start = date.getMonth();
+  var start = 7;// date.getMonth();
 
   // request url 
   //const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-08-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
@@ -34,14 +33,14 @@ function generateGraph(e) {
   async function makeAPICalls(variable, year, start) {
       // request url for ground truth
       const url = `https://openet-raster-api.org/timeseries/point?start_date=${year}-01-01&end_date=${year}-12-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&provisional=true&admin_key=hello`;
-      const truth = await requestAPI(url, variable);
+      var truth = await requestAPI(url, variable);
 
       // request url  for forecast
       const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-08-31&interval=monthly&lon=${lon}&lat=${lat}&model=ensemble&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
-      const forecast = await requestAPI(url2, variable);
+      var forecast = await requestAPI(url2, variable);
 
       // plot the data
-      var chart = plotAccuracy(truth, forecast, area, 'ET', start)
+      var chart = plotAccuracy(truth, forecast, area, variable, start)
 
       // when the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {

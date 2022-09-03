@@ -1,4 +1,32 @@
 function plotForecast(timeseries, area, variable, start) {
+
+    // get chart params
+    if (variable == 'et') {
+      var fullName = 'Evapotranspiration';
+      var subName = 'ET';
+      var softMax = 200;
+      var yAxisText = `${subName} (mm)`;
+      var valueSuffix = ' mm';
+    } else if (variable == 'eto') {
+      var fullName = 'Reference Evapotranspiration';
+      var subName = 'ETo';
+      var softMax = 200;
+      var yAxisText = `${subName} (mm)`;
+      var valueSuffix = ' mm';
+    } else if (variable == 'pr') {
+      var fullName = 'Precipitation';
+      var subName = 'Pr';
+      var softMax = 150;
+      var yAxisText = `${subName} (mm)`;
+      var valueSuffix = ' mm';
+    } else if (variable == 'ndvi') {
+      var fullName = 'Normalized Difference Vegetation Index';
+      var subName = 'NDVI';
+      var softMax = 1;
+      var yAxisText = `${subName}`;
+      var valueSuffix = '';
+    };
+
     // range calculation
     var range = new Array();
     for (i = 0; i < timeseries.length; i++) {
@@ -19,7 +47,7 @@ function plotForecast(timeseries, area, variable, start) {
         renderTo: "container1",
       },
       title: {
-        text: "Evapotranspiration Forecast",
+        text: `${fullName} Forecast`,
       },
       subtitle: {
         text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`,
@@ -29,9 +57,9 @@ function plotForecast(timeseries, area, variable, start) {
       },
       yAxis: {
         title: {
-          text: `${variable} (mm)`,
+          text: yAxisText,
         },
-        softMax: 200,
+        softMax: softMax,
         min: 0,
       },
       xAxis: {
@@ -52,7 +80,7 @@ function plotForecast(timeseries, area, variable, start) {
       },
       series: [
         {
-          name: "ET",
+          name: subName,
           data: timeseries,
           zoneAxis: "x",
           zones: [
@@ -64,7 +92,8 @@ function plotForecast(timeseries, area, variable, start) {
             },
           ],
           tooltip: {
-            valueSuffix: " mm",
+            valueSuffix: valueSuffix,
+            valueDecimals: 0
           },
         },
         {
@@ -80,7 +109,8 @@ function plotForecast(timeseries, area, variable, start) {
             enabled: false,
           },
           tooltip: {
-            valueSuffix: " mm",
+            valueSuffix: valueSuffix,
+            valueDecimals: 0
           },
         },
       ],
@@ -102,97 +132,126 @@ function plotForecast(timeseries, area, variable, start) {
       },
     });
     return chart;
-  }
+};
   
-  function plotAccuracy(truth, forecast, area, variable, start) {
-    var chart = new Highcharts.chart({
-      chart: {
-        renderTo: "container1",
-      },
+function plotAccuracy(truth, forecast, area, variable, start) {
+  
+  // get chart params
+  if (variable == 'et') {
+    var fullName = 'Evapotranspiration';
+    var subName = 'ET';
+    var softMax = 200;
+    var yAxisText = `${subName} (mm)`;
+    var valueSuffix = ' mm';
+  } else if (variable == 'eto') {
+    var fullName = 'Reference Evapotranspiration';
+    var subName = 'ETo';
+    var softMax = 200;
+    var yAxisText = `${subName} (mm)`;
+    var valueSuffix = ' mm';
+  } else if (variable == 'pr') {
+    var fullName = 'Precipitation';
+    var subName = 'Pr';
+    var softMax = 150;
+    var yAxisText = `${subName} (mm)`;
+    var valueSuffix = ' mm';
+  } else if (variable == 'ndvi') {
+    var fullName = 'Normalized Difference Vegetation Index';
+    var subName = 'NDVI';
+    var softMax = 1;
+    var yAxisText = `${subName}`;
+    var valueSuffix = '';
+  }; 
+
+  var chart = new Highcharts.chart({
+    chart: {
+      renderTo: "container1",
+    },
+    title: {
+      text: `${fullName} (2021)`,
+    },
+    subtitle: {
+      text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`,
+    },
+    credits: {
+      enabled: false,
+    },
+    yAxis: {
       title: {
-        text: "Evapotranspiration Forecast",
+        text: yAxisText,
       },
-      subtitle: {
-        text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`,
-      },
-      credits: {
-        enabled: false,
-      },
-      yAxis: {
-        title: {
-          text: `${variable} (mm)`,
-        },
-        softMax: 200,
-        min: 0,
-      },
-      xAxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
-      },
-      series: [
-        // series 1
-        {
-          name: "Forecasted",
-          data: forecast,
-          zoneAxis: "x",
-          zones: [
-            {
-              value: start,
-            },
-            {
-              dashStyle: "dot",
-            },
-          ],
-          tooltip: {
-            valueSuffix: " mm",
-            shared: true,
-          },
-        },
-        // series 2
-        {
-          name: "Observed",
-          data: truth,
-          tooltip: {
-            valueSuffix: " mm",
-          },
-        },
+      softMax: softMax,
+      min: 0,
+    },
+    xAxis: {
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ],
-      exporting: {
-        buttons: {
-          contextButton: {
-            menuItems: [
-              "viewFullscreen",
-              "printChart",
-              "separator",
-              "downloadPNG",
-              "downloadPDF",
-              "separator",
-              "downloadCSV",
-              "downloadXLS",
-            ],
+    },
+    series: [
+      // series 1
+      {
+        name: "Forecasted",
+        data: forecast,
+        zoneAxis: "x",
+        zones: [
+          {
+            value: start,
           },
+          {
+            dashStyle: "dot",
+          },
+        ],
+        tooltip: {
+          valueSuffix: valueSuffix,
+          valueDecimals: 0
         },
       },
-    });
-  
-    return chart;
-  }
-  
-  /*
-  pointFormatter: function() {
-  return this.point.key + this.series.name + ": " + this.y + "<br/>(" + parseFloat(this.y * 100 / this.series.chart.series[1].data[this.x].y).toFixed(0) + "%)"
-  }
-  */
+      // series 2
+      {
+        name: "Observed",
+        data: truth,
+        tooltip: {
+          valueSuffix: valueSuffix,
+          valueDecimals: 0
+        },
+      },
+    ],
+    exporting: {
+      buttons: {
+        contextButton: {
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadPDF",
+            "separator",
+            "downloadCSV",
+            "downloadXLS",
+          ],
+        },
+      },
+    },
+  });
+
+  return chart;
+};
+
+/*
+pointFormatter: function() {
+return this.point.key + this.series.name + ": " + this.y + "<br/>(" + parseFloat(this.y * 100 / this.series.chart.series[1].data[this.x].y).toFixed(0) + "%)"
+}
+*/
   
