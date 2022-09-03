@@ -21,7 +21,6 @@
     /* Black w/ opacity */
     padding-left: calc(var(--nav-width)/1.2);
     padding-right: calc(var(--nav-width)/1.2);
-    border-radius: 15px 0 0 0;
 }
 
 :root {
