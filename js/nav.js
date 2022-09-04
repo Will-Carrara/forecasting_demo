@@ -1,5 +1,36 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
+    // get variable options
+    const etToggle = document.getElementById('et-toggle');
+    const etoToggle = document.getElementById('eto-toggle');
+    /*
+    const prToggle = document.getElementById('pr-toggle');
+    const ndviToggle = document.getElementById('ndvi-toggle');
+    */
+
+    // check for variable change
+    if (etToggle && etoToggle) {
+        // set default
+        window.VARIABLE = 'et'
+        
+        // toggle chart to 
+        etToggle.addEventListener('click', () => {
+            window.VARIABLE = 'et'
+        });
+
+        etoToggle.addEventListener('click', () => {
+            window.VARIABLE = 'eto'
+        });
+        /*
+        prToggle.addEventListener('click', () => {
+            window.variable = 'pr'
+        });
+        ndviToggle.addEventListener('click', () => {
+            window.variable = 'ndvi'
+        });
+        */
+    };
+
     const showNavbar = (toggleId, navId, bodyId) => {
         const toggle = document.getElementById(toggleId),
             nav = document.getElementById(navId),
