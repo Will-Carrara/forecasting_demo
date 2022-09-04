@@ -25,7 +25,7 @@ function generateGraph(e) {
   var variable = 'et'
   var year = '2022'
   var date = new Date();
-  var start = 7;// date.getMonth();
+  var start = date.getMonth() -1;
 
   async function makeAPICalls(variable, year, start) {
 
@@ -46,7 +46,7 @@ function generateGraph(e) {
   }
 
   // retirve and plot data
-  makeAPICalls(variable, year, start)
+  makeAPICalls(VARIABLE, year, start)
 
   // display the modal popup with the graph and loader
   var modal = document.getElementById("graphModal");
