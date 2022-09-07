@@ -32,8 +32,8 @@
 .content .setting{
   display: flex;
   margin-bottom: 5px;
-  padding: 5px 12px;
-  border-bottom: 1px solid #ccc;
+  padding: 5px 0px;
+  border-bottom: 2px solid #ccc;
 }
 .content .share{
   position: relative;
