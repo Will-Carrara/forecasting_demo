@@ -47,18 +47,19 @@
 			<nav class="nav">
 				<div>
 					<a href="#" class="nav_logo" id="header"> <i class='bx bx-menu nav_logo-icon' id='header-toggle'></i> <span class="nav_logo-name">Options</span> </a>
-					<div class="nav_list">
+          			  <div class="nav_list">
 						<a href="index.html" class="nav_link"> <i class='bx bx-desktop nav_icon'></i> <span class="nav_name">Demo</span> </a>
-            			<a href="#" class="nav_link"> <i class='bx bx-layer nav_icon'></i> <span class="nav_name">Layers</span> </a>
 						<a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Account</span> </a>
-						<a href="forecast.html" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
+						<a href="forecast.html" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
 						<a href="#" class="nav_link"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Download</span> </a>
             			<a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
-					</div>
+					  </div>
 				</div>
-				<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+				<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
 			</nav>
 		</div>
+	</body>
+
 	</body>
 	<!--Container Main start-->
 	<div class="height-100 bg-light">
@@ -79,30 +80,34 @@
 		</div>
 	</div>
 	<script>
-	// mapbox token
-	mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
-	// base map
-	var map = new mapboxgl.Map({
-		container: "map",
-		style: "mapbox://styles/mapbox/dark-v10",
-		//style: "mapbox://styles/mapbox/satellite-streets-v11",
-		center: [-120.393, 36.937],
-		zoom: 5,
-		maxZoom: 15,
-		minZoom: 5,
-	});
-	// add search bar
-	map.addControl(new MapboxGeocoder({
-		accessToken: mapboxgl.accessToken,
-		mapboxgl: mapboxgl
-	}), 'top-left');
-	// add layer controls
-	map.addControl(new mapboxgl.NavigationControl());
-	// display scale ruler
-	map.addControl(new mapboxgl.ScaleControl({
-		position: 'bottom-left',
-		unit: 'metric'
-	}));
+		// set GLOBAL defaults
+		window.VARIABLE = 'et'
+     	window.INTERVAL = 'monthly'
+
+		// mapbox token
+		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
+		// base map
+		var map = new mapboxgl.Map({
+			container: "map",
+			style: "mapbox://styles/mapbox/dark-v10",
+			//style: "mapbox://styles/mapbox/satellite-streets-v11",
+			center: [-120.393, 36.937],
+			zoom: 5,
+			maxZoom: 15,
+			minZoom: 5,
+		});
+		// add search bar
+		map.addControl(new MapboxGeocoder({
+			accessToken: mapboxgl.accessToken,
+			mapboxgl: mapboxgl
+		}), 'top-left');
+		// add layer controls
+		map.addControl(new mapboxgl.NavigationControl());
+		// display scale ruler
+		map.addControl(new mapboxgl.ScaleControl({
+			position: 'bottom-left',
+			unit: 'metric'
+		}));
 	</script>
 	<!-- Map Functions -->
 	<script type="text/javascript" src="js/zoom.js"></script>

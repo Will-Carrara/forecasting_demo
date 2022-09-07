@@ -4,7 +4,7 @@ function plotForecast(timeseries, area, variable, start) {
     if (variable == 'et') {
       var fullName = 'Evapotranspiration';
       var subName = 'ET';
-      var softMax = 200;
+      var softMax = 12;
       var yAxisText = `${subName} (mm)`;
       var valueSuffix = ' mm';
     } else if (variable == 'eto') {
@@ -27,24 +27,35 @@ function plotForecast(timeseries, area, variable, start) {
       var valueSuffix = '';
     };
 
+    // FIX THIS MONTHLY
+    var arr_start = 8;
+    // FIX THIS DAILY
+    //var arr_start = 247;
+
     // range calculation
     var range = new Array();
     for (i = 0; i < timeseries.length; i++) {
-      if (i < start) {
-        range.push([null, null]);
-      } else if (i == start) {
-        range.push([parseInt(timeseries[i]), parseInt(timeseries[i])]);
+      if (i < arr_start) {
+        range.push([timeseries[i][0], null, null]);
+      } else if (i == arr_start) {
+        range.push(
+         [timeseries[i][0], timeseries[i][1], timeseries[i][1]], 
+        );
       } else {
-        range.push([
-          parseInt(timeseries[i] * 0.75),
-          parseInt(timeseries[i] * 1.25),
-        ]);
-      }
-    }
+        range.push(
+          [timeseries[i][0], parseFloat(timeseries[i][1] * 0.75), parseFloat(timeseries[i][1] * 1.25)],
+        );
+      };
+    };
   
     var chart = new Highcharts.chart({
       chart: {
         renderTo: "container1",
+        zoomType: 'x',
+        scrollablePlotArea: {
+            minWidth: 600,
+            scrollPositionX: 1
+        }
       },
       title: {
         text: `${fullName} Forecast`,
@@ -63,20 +74,13 @@ function plotForecast(timeseries, area, variable, start) {
         min: 0,
       },
       xAxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        type: 'datetime',
+        tickInterval: 30 * 24 * 3600 * 1000, // one month 
+        labels: {
+          formatter: function() {
+            return Highcharts.dateFormat('%b', this.value);
+          }
+        }
       },
       series: [
         {
@@ -93,7 +97,7 @@ function plotForecast(timeseries, area, variable, start) {
           ],
           tooltip: {
             valueSuffix: valueSuffix,
-            valueDecimals: 0
+            valueDecimals: 2
           },
         },
         {
@@ -110,9 +114,9 @@ function plotForecast(timeseries, area, variable, start) {
           },
           tooltip: {
             valueSuffix: valueSuffix,
-            valueDecimals: 0
+            valueDecimals: 2
           },
-        },
+        }
       ],
       exporting: {
         buttons: {
@@ -184,20 +188,13 @@ function plotAccuracy(truth, forecast, area, variable, start) {
       min: 0,
     },
     xAxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      type: 'datetime',
+      tickInterval: 30 * 24 * 3600 * 1000, // one month 
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%b', this.value);
+        }
+      }
     },
     series: [
       // series 1
@@ -215,7 +212,10 @@ function plotAccuracy(truth, forecast, area, variable, start) {
         ],
         tooltip: {
           valueSuffix: valueSuffix,
-          valueDecimals: 0
+          valueDecimals: 2,
+          // monthly should be '%b, %Y'
+          // daily should be '%b, %e'
+          xDateFormat: '%b, %Y'
         },
       },
       // series 2
@@ -224,7 +224,8 @@ function plotAccuracy(truth, forecast, area, variable, start) {
         data: truth,
         tooltip: {
           valueSuffix: valueSuffix,
-          valueDecimals: 0
+          valueDecimals: 2,
+          xDateFormat: '%b, %Y'
         },
       },
     ],

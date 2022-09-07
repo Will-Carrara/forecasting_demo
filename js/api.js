@@ -3,16 +3,16 @@ function requestAPI(url, variable) {
 
   var data = fetch(url)
       .then((response) => {
-          return response.json()
-      })
+          return response.json();
+        })
       .then((result) => {
           // populate series
-          var timeseries = new Array();
+          var timeseries = [];
           for (i = 0; i < result.length; i++) {
-              timeseries.push(result[i][variable]);
-          }
+              var parsed_time = new Date(result[i]['time']).getTime()
+              timeseries.push([parsed_time, parseFloat(result[i][variable])]);
+          };
           return timeseries
       });
-
-  return data
+  return data;
 }

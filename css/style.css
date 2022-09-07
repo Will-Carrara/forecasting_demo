@@ -4,6 +4,8 @@ body {
   background-color: #F7F6FB;
   padding-left: calc(var(--nav-width));
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
 
