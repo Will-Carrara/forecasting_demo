@@ -29,6 +29,8 @@
 	<link rel="stylesheet" href="css/progress_bar.css" />
 	<!-- Nav Bar -->
 	<link rel="stylesheet" href="css/nav.css" />
+	<!-- Context Menu -->
+	<link rel="stylesheet" href="css/context.css" type="text/css" />
 	<!-- Graph -->
 	<link rel="stylesheet" href="css/chart.css" type="text/css" />
 	<!-- Button -->
@@ -42,6 +44,86 @@
 
 <body>
 
+	<!-- Context Menu -->
+	<div class="wrapper">
+		<div class="content">
+		  <ul class="menu">
+			<div class="setting">
+				<li class="item">
+				<i class="bx bx-cog"></i>
+				<span>Data Options</span>
+				</li>
+			</div>
+			<li class="item share">
+			  <div>
+				<i class="bx bx-layer"></i>
+				<span>Variables</span>
+			  </div>
+			  <i class="uil uil-angle-right"></i>
+			  <ul class="share-menu">
+				<li class="item active2" id="et-toggle">
+				  <span>ET</span>
+				</li>
+				<li class="item" id="eto-toggle">
+				  <span>ETo</span>
+				</li>
+				<li class="item" id="etof-toggle">
+				  <span>ETof</span>
+				</li>
+				<li class="item" id="pr-toggle">
+				  <span>PR</span>
+				</li>
+				<li class="item" id="ndvi-toggle">
+					<span>NDVI</span>
+				  </li>
+			  </ul>
+			</li>
+			<li class="item share">
+				<div>
+				  <i class="bx bx-stopwatch"></i>
+				  <span>Interval</span>
+				</div>
+				<i class="uil uil-angle-right"></i>
+				<ul class="share-menu">
+				  <li class="item" id="daily-toggle">
+					<span>Daily</span>
+				  </li>
+				  <li class="item active2" id="monthly-toggle">
+					<span>Monthly</span>
+				  </li>
+				</ul>
+			</li>
+			<li class="item share">
+				<div>
+				  <i class="bx bx-calendar"></i>
+				  <span>Month</span>
+				</div>
+				<i class="uil uil-angle-right"></i>
+				<ul class="share-menu">
+				  <li class="item">
+					<span>January</span>
+				  </li>
+				  <li class="item active2">
+					<span>Febuary</span>
+				  </li>
+				  <li class="item">
+					<span>March</span>
+				  </li>
+				  <li class="item">
+					<span>April</span>
+				  </li><li class="item">
+					<span>May</span>
+				  </li>
+				</ul>
+			</li>
+			<li class="item">
+			  <i class="bx bx-link"></i>
+			  <span>Get Link</span>
+			</li>
+		  </ul>
+		</div>
+	</div>
+
 	<body id="body-pd">
 		<div class="l-navbar" id="nav-bar">
 			<nav class="nav">
@@ -50,7 +132,7 @@
           			  <div class="nav_list">
 						<a href="index.html" class="nav_link"> <i class='bx bx-desktop nav_icon'></i> <span class="nav_name">Demo</span> </a>
 						<a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Account</span> </a>
-						<a href="forecast.html" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
+						<a href="forecast.html" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
 						<a href="#" class="nav_link"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Download</span> </a>
             			<a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
 					  </div>
@@ -117,6 +199,7 @@
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="js/progress.js"></script>
 	<script type="text/javascript" src="js/nav.js"></script>
+	<script type="text/javascript" src="js/context_menu.js"></script>
 </body>
 
 </html>

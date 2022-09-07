@@ -17,7 +17,7 @@
     position: absolute;
     right: 20px;
     bottom: 20px;
-    background-color: #7bb5ec;
+    background-color: var(--first-color);;
 }
 
 /* populate map button hover effect */

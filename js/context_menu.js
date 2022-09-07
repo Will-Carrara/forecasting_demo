@@ -18,34 +18,98 @@ window.addEventListener("contextmenu", e => {
     // check for variable change
     etToggle.addEventListener('click', () => {
         // set global variable to et
-        window.VARIABLE = 'et'          
+        window.VARIABLE = 'et'   
+        
+        // remove other active variables
+        etToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2"); 
+        etofToggle.classList.remove("active2"); 
+        prToggle.classList.remove("active2"); 
+        ndviToggle.classList.remove("active2"); 
+        
+        // add active status
+        etToggle.classList.add("active2"); 
     });
     etoToggle.addEventListener('click', () => {
         // set global variable to et0
-        window.VARIABLE = 'eto'          
+        window.VARIABLE = 'eto'  
+
+        // remove other active variables
+        etToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2"); 
+        etofToggle.classList.remove("active2"); 
+        prToggle.classList.remove("active2"); 
+        ndviToggle.classList.remove("active2"); 
+        
+        // add active status
+        etoToggle.classList.add("active2"); 
     });
     etofToggle.addEventListener('click', () => {
         // set global variable to etof
-        window.VARIABLE = 'etof'          
+        window.VARIABLE = 'etof'  
+
+        // remove other active variables
+        etToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2"); 
+        etofToggle.classList.remove("active2"); 
+        prToggle.classList.remove("active2"); 
+        ndviToggle.classList.remove("active2"); 
+        
+        // add active status  
+        etofToggle.classList.add("active2");      
     });
     prToggle.addEventListener('click', () => {
         // set global variable to pr
-        window.VARIABLE = 'pr'          
+        window.VARIABLE = 'pr'   
+        
+        // remove other active variables
+        etToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2"); 
+        etofToggle.classList.remove("active2"); 
+        prToggle.classList.remove("active2"); 
+        ndviToggle.classList.remove("active2"); 
+        
+        // add active status
+        prToggle.classList.add("active2");       
     });
     ndviToggle.addEventListener('click', () => {
-        // set global variable to et
-        window.VARIABLE = 'ndvi'          
+        // set global variable to ndvi
+        window.VARIABLE = 'ndvi'   
+        
+        // remove other active variables
+        etToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2"); 
+        etofToggle.classList.remove("active2"); 
+        prToggle.classList.remove("active2"); 
+        ndviToggle.classList.remove("active2"); 
+        
+        // add active status
+        ndviToggle.classList.add("active2");       
     });
 
     // check for interval change
     dailyToggle.addEventListener('click', () => {
         // set global interval to daily
-        window.INTERVAL = 'daily'          
+        window.INTERVAL = 'daily'  
+        
+        // remove other active variables
+        dailyToggle.classList.remove("active2"); 
+        monthlyToggle.classList.remove("active2"); 
+
+        // add active status
+        dailyToggle.classList.add("active2");         
     });
     monthlyToggle.addEventListener('click', () => {
         // set global interval to monthly
-        window.INTERVAL = 'monthly'          
+        window.INTERVAL = 'monthly'  
+        // remove other active variables
+        dailyToggle.classList.remove("active2"); 
+        monthlyToggle.classList.remove("active2"); 
+
+        // add active status
+        monthlyToggle.classList.add("active2");          
     });
+
 
     e.preventDefault();
     let x = e.offsetX, y = e.offsetY,

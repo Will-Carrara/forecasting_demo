@@ -10,13 +10,13 @@ function plotForecast(timeseries, area, variable, start) {
     } else if (variable == 'eto') {
       var fullName = 'Reference Evapotranspiration';
       var subName = 'ETo';
-      var softMax = 200;
+      var softMax = 12;
       var yAxisText = `${subName} (mm)`;
       var valueSuffix = ' mm';
     } else if (variable == 'pr') {
       var fullName = 'Precipitation';
       var subName = 'Pr';
-      var softMax = 150;
+      var softMax = 12;
       var yAxisText = `${subName} (mm)`;
       var valueSuffix = ' mm';
     } else if (variable == 'ndvi') {
@@ -97,7 +97,10 @@ function plotForecast(timeseries, area, variable, start) {
           ],
           tooltip: {
             valueSuffix: valueSuffix,
-            valueDecimals: 2
+            valueDecimals: 2,
+            // monthly should be '%b, %Y'
+            // daily should be '%b, %e'
+            xDateFormat: '%b, %Y'
           },
         },
         {
@@ -114,7 +117,10 @@ function plotForecast(timeseries, area, variable, start) {
           },
           tooltip: {
             valueSuffix: valueSuffix,
-            valueDecimals: 2
+            valueDecimals: 2,
+            // monthly should be '%b, %Y'
+            // daily should be '%b, %e'
+            xDateFormat: '%b, %Y'
           },
         }
       ],
@@ -144,19 +150,19 @@ function plotAccuracy(truth, forecast, area, variable, start) {
   if (variable == 'et') {
     var fullName = 'Evapotranspiration';
     var subName = 'ET';
-    var softMax = 200;
+    var softMax = 12;
     var yAxisText = `${subName} (mm)`;
     var valueSuffix = ' mm';
   } else if (variable == 'eto') {
     var fullName = 'Reference Evapotranspiration';
     var subName = 'ETo';
-    var softMax = 200;
+    var softMax = 12;
     var yAxisText = `${subName} (mm)`;
     var valueSuffix = ' mm';
   } else if (variable == 'pr') {
     var fullName = 'Precipitation';
     var subName = 'Pr';
-    var softMax = 150;
+    var softMax = 12;
     var yAxisText = `${subName} (mm)`;
     var valueSuffix = ' mm';
   } else if (variable == 'ndvi') {
@@ -170,9 +176,14 @@ function plotAccuracy(truth, forecast, area, variable, start) {
   var chart = new Highcharts.chart({
     chart: {
       renderTo: "container1",
+      zoomType: 'x',
+      scrollablePlotArea: {
+          minWidth: 600,
+          scrollPositionX: 1
+      }
     },
     title: {
-      text: `${fullName} (2021)`,
+      text: `2021 ${fullName}`,
     },
     subtitle: {
       text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`,
