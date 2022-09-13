@@ -1,6 +1,8 @@
+/*
+
 // event listener for zooming
 map.on("zoomend", function() {
-  /* Change layers based on current zoom level */
+  /* Change layers based on current zoom level 
 
   // current zoom level
   var zoom = map.getZoom();
@@ -14,3 +16,6 @@ map.on("zoomend", function() {
   }
 
 });
+*/
+
+

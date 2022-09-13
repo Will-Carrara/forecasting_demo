@@ -29,6 +29,7 @@ function generateGraph(e) {
   var model = 'ensemble';
 
   async function makeAPICalls(variable, year, start) {
+      
       // request url for ground truth
       const url = `https://openet-raster-api.org/timeseries/point?start_date=${year}-01-01&end_date=${year}-12-31&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&provisional=true&admin_key=hello`;
       var truth = await requestAPI(url, variable);

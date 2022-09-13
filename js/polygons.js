@@ -36,7 +36,7 @@ map.on('load', () => {
           'line-color': '#000',
           'line-width': 3
       }
-  });
+  }, 'country-label');
 
   // create a popup, but don't add it to the map yet
   const popup = new mapboxgl.Popup({
