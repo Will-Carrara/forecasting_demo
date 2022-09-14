@@ -69,6 +69,7 @@ async function addLayers() {
 
   // request url for ground truth
   const url = 'https://openet-raster-api.org/visual/tile_id?admin_key=hello';
+
   var args = {
     "start_date": "2021-01-01",
     "end_date": "2021-12-31",
@@ -83,6 +84,7 @@ async function addLayers() {
     "ref_et_source": "gridmet",
     "pixel_aggregation": "sum",
     "units": "english",
+    "resample": 30,
     "provisional": "true",
     "visual_parameters": master['monthly'][VARIABLE]['tile_palette']
   }
