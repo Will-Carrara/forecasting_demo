@@ -70,6 +70,7 @@ async function addLayers() {
   // request url for ground truth
   const url = 'https://openet-raster-api.org/visual/tile_id?admin_key=hello';
 
+  // request tiles for all of CONUS
   var args = {
     "start_date": "2021-01-01",
     "end_date": "2021-12-31",
@@ -84,11 +85,18 @@ async function addLayers() {
     "ref_et_source": "gridmet",
     "pixel_aggregation": "sum",
     "units": "english",
-    "resample": 30,
+    "resample": 5,
     "provisional": "true",
     "visual_parameters": master['monthly'][VARIABLE]['tile_palette']
   }
-  var tiles = await requestTiles(url ,args);
+
+  // high resolution for zoom levels (5-6)
+  var tiles_high = await requestTiles(url ,args);
+
+
+  // low resolution for zoom levels (7-15)
+  args['resample'] = 0
+  var tiles_low = await requestTiles(url ,args);
 
   /*
   map.eachLayer(function (layer) {
@@ -97,17 +105,16 @@ async function addLayers() {
   */
 
   //map.removeSource('ET')
-
-  console.log(map.getStyle().layers)
+  //console.log(map.getStyle().layers)
 
   map.addLayer({
-    "id": "Current",
+    "id": "High",
     "type": "raster",
     "source": {
         "type": "raster",
-        "tiles": [tiles['tile_fetcher']],
-        "minzoom": 5,
-        "maxzoom": 15,
+        "tiles": [tiles_high['tile_fetcher']],
+        "minzoom": 15,
+        "maxzoom": 16,
         "tileSize": 256
     },
     'layout': {
@@ -116,4 +123,22 @@ async function addLayers() {
   },
   "country-label"
   );
+
+  map.addLayer({
+    "id": "Low",
+    "type": "raster",
+    "source": {
+        "type": "raster",
+        "tiles": [tiles_low['tile_fetcher']],
+        "minzoom": 5,
+        "maxzoom": 14,
+        "tileSize": 256
+    },
+    'layout': {
+      'visibility': 'visible',
+    }
+  },
+  "High"
+  );
+
 }

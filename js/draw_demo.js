@@ -50,7 +50,7 @@ function generateGraph(e) {
       };
   }
 
-  // retirve and plot data
+  // retrieve and plot data
   makeAPICalls(VARIABLE, year, start)
 
   // display the modal popup with the graph and loader
