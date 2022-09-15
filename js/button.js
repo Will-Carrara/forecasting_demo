@@ -140,5 +140,4 @@ async function addLayers() {
   },
   "High"
   );
-
 }

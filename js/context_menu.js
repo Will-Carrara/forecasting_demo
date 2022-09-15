@@ -3,7 +3,6 @@ shareMenu = contextMenu.querySelector(".share-menu");
 
 window.addEventListener("contextmenu", e => {
 
- 
     // get variable options
     const etToggle = document.getElementById('et-toggle');
     const etoToggle = document.getElementById('eto-toggle');
@@ -30,6 +29,7 @@ window.addEventListener("contextmenu", e => {
         // add active status
         etToggle.classList.add("active2"); 
     });
+
     etoToggle.addEventListener('click', () => {
         // set global variable to et0
         window.VARIABLE = 'eto'  
@@ -58,6 +58,7 @@ window.addEventListener("contextmenu", e => {
         // add active status  
         etofToggle.classList.add("active2");      
     });
+
     prToggle.addEventListener('click', () => {
         // set global variable to pr
         window.VARIABLE = 'pr'   
@@ -72,6 +73,7 @@ window.addEventListener("contextmenu", e => {
         // add active status
         prToggle.classList.add("active2");       
     });
+
     ndviToggle.addEventListener('click', () => {
         // set global variable to ndvi
         window.VARIABLE = 'ndvi'   
@@ -99,6 +101,7 @@ window.addEventListener("contextmenu", e => {
         // add active status
         dailyToggle.classList.add("active2");         
     });
+    
     monthlyToggle.addEventListener('click', () => {
         // set global interval to monthly
         window.INTERVAL = 'monthly'  

@@ -1,0 +1,9 @@
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  width: 40%; 
+  height: 10%; 
+  background: var(--first-color);
+  border-radius: 5px;
+  padding: 1px;
+  margin-left: 20px;
+}
