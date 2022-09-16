@@ -28,6 +28,7 @@
 .content .item span{
   margin-left: 8px;
   font-size: 19px;
+  color: var(--first-color-light);
 }
 .content .setting{
   display: flex;
