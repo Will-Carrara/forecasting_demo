@@ -20,7 +20,6 @@ window.addEventListener("contextmenu", e => {
         window.VARIABLE = 'et'   
         
         // remove other active variables
-        etToggle.classList.remove("active2"); 
         etoToggle.classList.remove("active2"); 
         etofToggle.classList.remove("active2"); 
         prToggle.classList.remove("active2"); 
@@ -36,7 +35,6 @@ window.addEventListener("contextmenu", e => {
 
         // remove other active variables
         etToggle.classList.remove("active2"); 
-        etoToggle.classList.remove("active2"); 
         etofToggle.classList.remove("active2"); 
         prToggle.classList.remove("active2"); 
         ndviToggle.classList.remove("active2"); 
@@ -50,8 +48,7 @@ window.addEventListener("contextmenu", e => {
 
         // remove other active variables
         etToggle.classList.remove("active2"); 
-        etoToggle.classList.remove("active2"); 
-        etofToggle.classList.remove("active2"); 
+        etoToggle.classList.remove("active2");  
         prToggle.classList.remove("active2"); 
         ndviToggle.classList.remove("active2"); 
         
@@ -67,7 +64,6 @@ window.addEventListener("contextmenu", e => {
         etToggle.classList.remove("active2"); 
         etoToggle.classList.remove("active2"); 
         etofToggle.classList.remove("active2"); 
-        prToggle.classList.remove("active2"); 
         ndviToggle.classList.remove("active2"); 
         
         // add active status
@@ -83,7 +79,6 @@ window.addEventListener("contextmenu", e => {
         etoToggle.classList.remove("active2"); 
         etofToggle.classList.remove("active2"); 
         prToggle.classList.remove("active2"); 
-        ndviToggle.classList.remove("active2"); 
         
         // add active status
         ndviToggle.classList.add("active2");       
@@ -95,7 +90,6 @@ window.addEventListener("contextmenu", e => {
         window.INTERVAL = 'daily'  
         
         // remove other active variables
-        dailyToggle.classList.remove("active2"); 
         monthlyToggle.classList.remove("active2"); 
 
         // add active status
@@ -107,8 +101,7 @@ window.addEventListener("contextmenu", e => {
         window.INTERVAL = 'monthly'  
         // remove other active variables
         dailyToggle.classList.remove("active2"); 
-        monthlyToggle.classList.remove("active2"); 
-
+        
         // add active status
         monthlyToggle.classList.add("active2");          
     });

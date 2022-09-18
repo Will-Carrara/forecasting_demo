@@ -5,6 +5,8 @@
 	<!-- Site Title -->
 	<title>Forecasting Demo</title>
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+	<!-- Master Controls -->
+	<script type="text/javascript" src="admin/variables.js"></script>
 	<!-- Map Imports -->
 	<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js"></script>
@@ -19,9 +21,9 @@
 	<script src="https://code.highcharts.com/highcharts-more.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-	<!-- API Handeling -->
+	<!-- API Handling -->
 	<!-- Buttons -->
 	<script type="text/javascript" src="js/button.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
@@ -29,21 +31,22 @@
 	<link rel="stylesheet" href="css/progress_bar.css" />
 	<!-- Nav Bar -->
 	<link rel="stylesheet" href="css/nav.css" />
-	<!-- Context Menu -->
-	<link rel="stylesheet" href="css/context.css" type="text/css" />
+	<!-- Nav Bar -->
+	<link rel="stylesheet" href="css/opacity.css" />
 	<!-- Graph -->
 	<link rel="stylesheet" href="css/chart.css" type="text/css" />
+	<!-- Context Menu -->
+	<link rel="stylesheet" href="css/context.css" type="text/css" />
 	<!-- Button -->
 	<link rel="stylesheet" href="css/buttons.css" type="text/css" />
 	<!-- Map Styling -->
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" type="text/css" />
 	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css" type="text/css" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css" /> 
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css" />
 </head>
 
 <body>
-
 	<!-- Context Menu -->
 	<div class="wrapper">
 		<div class="content">
@@ -117,13 +120,15 @@
 				</ul>
 			</li>
 			<li class="item">
-			  <i class="bx bx-link"></i>
-			  <span>Get Link</span>
+			  <i class="bx bx-slider-alt"></i>
+			  <span>Opacity</span>
+			  <input class="slider" id="slider" type="range" min="0" max="100" step="0" value="100">
 			</li>
 		  </ul>
 		</div>
 	</div>
-
+	
+	<!-- Nav Menu -->
 	<body id="body-pd">
 		<div class="l-navbar" id="nav-bar">
 			<nav class="nav">
@@ -141,15 +146,14 @@
 			</nav>
 		</div>
 	</body>
-
-	</body>
-	<!--Container Main start-->
+	
+	<!--Container Main -->
 	<div class="height-100 bg-light">
 		<!-- Map -->
 		<div id="map"></div>
 		<!-- Populate Button -->
-		<button class="button button1" onclick="fullParty()">Populate Map</button>
-		<!-- Modal Popup-->
+		<button class="button button1" onclick="addLayers(); smallParty();">Populate Map</button>
+		<!-- Modal Graph Popup-->
 		<div id="graphModal" class="modal">
 			<div class="modal-content">
 				<!-- Loading Bar -->
@@ -161,6 +165,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script>
 		// set GLOBAL defaults
 		window.VARIABLE = 'et'
@@ -170,19 +175,20 @@
 		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
 		// base map
 		var map = new mapboxgl.Map({
-			container: "map",
-			style: "mapbox://styles/mapbox/dark-v10",
-			//style: "mapbox://styles/mapbox/satellite-streets-v11",
-			center: [-120.393, 36.937],
-			zoom: 5,
-			maxZoom: 15,
-			minZoom: 5,
-		});
+            container: "map",
+            style: "mapbox://styles/mapbox/satellite-streets-v11",
+            center: [-120.393, 36.937],
+            zoom: 5,
+            maxZoom: 15,
+            minZoom: 5,
+        });
+
 		// add search bar
 		map.addControl(new MapboxGeocoder({
 			accessToken: mapboxgl.accessToken,
 			mapboxgl: mapboxgl
 		}), 'top-left');
+
 		// add layer controls
 		map.addControl(new mapboxgl.NavigationControl());
 		// display scale ruler
@@ -190,16 +196,18 @@
 			position: 'bottom-left',
 			unit: 'imperial'
 		}));
+
 	</script>
+
 	<!-- Map Functions -->
-	<script type="text/javascript" src="js/zoom.js"></script>
 	<script type="text/javascript" src="js/draw_forecast.js"></script>
-	<!-- <script type="text/javascript" src="js/polygons.js"></script> -->
+	<script type="text/javascript" src="js/polygons.js"></script>
 	<script type="text/javascript" src="js/api.js"></script>
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="js/progress.js"></script>
 	<script type="text/javascript" src="js/nav.js"></script>
 	<script type="text/javascript" src="js/context_menu.js"></script>
+	<script type="text/javascript" src="js/opacity.js"></script>
 </body>
 
 </html>

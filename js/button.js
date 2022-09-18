@@ -93,20 +93,16 @@ async function addLayers() {
   // high resolution for zoom levels (5-6)
   var tiles_high = await requestTiles(url ,args);
 
-
   // low resolution for zoom levels (7-15)
   args['resample'] = 0
   var tiles_low = await requestTiles(url ,args);
 
-  /*
-  map.eachLayer(function (layer) {
-    map.removeLayer(layer);
-  });
-  */
 
   //map.removeSource('ET')
   //console.log(map.getStyle().layers)
 
+  map.removeLayer('High')
+  map.removeSource('High')
   map.addLayer({
     "id": "High",
     "type": "raster",
@@ -124,6 +120,8 @@ async function addLayers() {
   "country-label"
   );
 
+  map.removeLayer('Low')
+  map.removeSource('Low')
   map.addLayer({
     "id": "Low",
     "type": "raster",

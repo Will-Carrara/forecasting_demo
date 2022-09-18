@@ -1,5 +1,27 @@
 // add custom geojson
 map.on('load', () => {
+    // add fake layer to raster tiles
+    map.addSource('High', {
+        type: 'geojson',
+        data: null
+    });
+    map.addSource('Low', {
+        type: 'geojson',
+        data: null
+    });
+    map.addLayer({
+        'id': 'High',
+        'type': 'line',
+        'source': 'High',
+        'layout': {}
+    });
+    map.addLayer({
+        'id': 'Low',
+        'type': 'line',
+        'source': 'Low',
+        'layout': {}
+    });
+
   map.addSource('fields', {
       type: 'geojson',
       data: 'https://raw.githubusercontent.com/Will-Carrara/forecasting_demo/main/data/fields.geojson'
@@ -24,7 +46,7 @@ map.on('load', () => {
           ],
           'fill-opacity': 0.75
       }
-  });
+  }, 'country-label');
 
   // add a black outline around the polygons
   map.addLayer({
