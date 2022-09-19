@@ -115,7 +115,12 @@ async function addLayers() {
     },
     'layout': {
       'visibility': 'visible',
-    }
+    },
+    "paint": {
+      // here we define defaut opacity is zero
+      "raster-opacity": .5,
+      "raster-opacity-transition": {duration: 2000},
+      }
   },
   "country-label"
   );
@@ -134,8 +139,17 @@ async function addLayers() {
     },
     'layout': {
       'visibility': 'visible',
-    }
+    },
+    "paint": {
+        // here we define defaut opacity is zero
+        "raster-opacity": .5,
+        "raster-opacity-transition": {duration: 2000},
+        }
   },
   "High"
   );
+
+  // reset opacity to 50%
+  const opacity = document.getElementById('slider')
+  opacity.value = 50;
 }
