@@ -69,6 +69,9 @@ async function addLayers() {
   // request url for ground truth
   const url = 'https://openet-raster-api.org/visual/tile_id?admin_key=hello';
 
+  // starting opacity
+  var initial_opacity = .56
+
   // request tiles for all of CONUS
   var args = {
     "start_date": "2021-01-01",
@@ -116,7 +119,7 @@ async function addLayers() {
     },
     "paint": {
       // here we define defaut opacity is zero
-      "raster-opacity": .5,
+      "raster-opacity": initial_opacity,
       "raster-opacity-transition": {duration: 2000},
       }
   },
@@ -140,7 +143,7 @@ async function addLayers() {
     },
     "paint": {
         // here we define defaut opacity is zero
-        "raster-opacity": .5,
+        "raster-opacity": initial_opacity,
         "raster-opacity-transition": {duration: 2000},
         }
   },
@@ -149,5 +152,5 @@ async function addLayers() {
 
   // reset opacity to 50%
   const opacity = document.getElementById('slider')
-  opacity.value = 50;
+  opacity.value = initial_opacity*100;
 }
