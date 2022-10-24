@@ -1,4 +1,10 @@
 function plotForecast(timeseries, area, variable, start) {
+    // chang hover pop up for daily
+    if (INTERVAL == "daily") {
+      var xDateFormat = '%b, %e'
+    } else {
+      var xDateFormat = '%b, %Y'
+    }
 
     // get chart params
     if (variable == 'et') {
@@ -19,6 +25,12 @@ function plotForecast(timeseries, area, variable, start) {
       var softMax = 12;
       var yAxisText = `${subName} (mm)`;
       var valueSuffix = ' mm';
+    } else if (variable == 'etof') {
+      var fullName = 'Fraction of Reference Evapotranspiration';
+      var subName = 'ETof';
+      var softMax = 1;
+      var yAxisText = `${subName}`;
+      var valueSuffix = '';
     } else if (variable == 'ndvi') {
       var fullName = 'Normalized Difference Vegetation Index';
       var subName = 'NDVI';
@@ -93,9 +105,7 @@ function plotForecast(timeseries, area, variable, start) {
           tooltip: {
             valueSuffix: valueSuffix,
             valueDecimals: 2,
-            // monthly should be '%b, %Y'
-            // daily should be '%b, %e'
-            xDateFormat: '%b, %Y'
+            xDateFormat: xDateFormat
           },
         },
         {
@@ -140,6 +150,13 @@ function plotForecast(timeseries, area, variable, start) {
 };
   
 function plotAccuracy(truth, forecast, area, variable, start) {
+
+  // chang hover pop up for daily
+  if (INTERVAL == "daily") {
+    var xDateFormat = '%b, %e'
+  } else {
+    var xDateFormat = '%b, %Y'
+  }
   
   // get chart params
   if (variable == 'et') {
@@ -160,6 +177,12 @@ function plotAccuracy(truth, forecast, area, variable, start) {
     var softMax = 12;
     var yAxisText = `${subName} (mm)`;
     var valueSuffix = ' mm';
+  } else if (variable == 'etof') {
+    var fullName = 'Fraction of Reference Evapotranspiration';
+    var subName = 'ETof';
+    var softMax = 1;
+    var yAxisText = `${subName}`;
+    var valueSuffix = '';
   } else if (variable == 'ndvi') {
     var fullName = 'Normalized Difference Vegetation Index';
     var subName = 'NDVI';
@@ -220,9 +243,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
         tooltip: {
           valueSuffix: valueSuffix,
           valueDecimals: 2,
-          // monthly should be '%b, %Y'
-          // daily should be '%b, %e'
-          xDateFormat: '%b, %Y'
+          xDateFormat: xDateFormat
         },
       },
       // series 2
@@ -232,7 +253,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
         tooltip: {
           valueSuffix: valueSuffix,
           valueDecimals: 2,
-          xDateFormat: '%b, %Y'
+          xDateFormat: xDateFormat
         },
       },
     ],
