@@ -84,7 +84,7 @@ function plotForecast(timeseries, area, variable, start) {
           zoneAxis: "x",
           zones: [
             {
-              value: start,
+              value: timeseries[start][0],
             },
             {
               dashStyle: "dot",
@@ -210,6 +210,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
         zoneAxis: "x",
         zones: [
           {
+            // BUG for daily and monthly (Can be given date or epoch)
             value: start,
           },
           {
