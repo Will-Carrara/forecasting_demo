@@ -27,17 +27,12 @@ function plotForecast(timeseries, area, variable, start) {
       var valueSuffix = '';
     };
 
-    // FIX THIS MONTHLY
-    var arr_start = 8;
-    // FIX THIS DAILY
-    //var arr_start = 247;
-
     // range calculation
     var range = new Array();
     for (i = 0; i < timeseries.length; i++) {
-      if (i < arr_start) {
+      if (i < start) {
         range.push([timeseries[i][0], null, null]);
-      } else if (i == arr_start) {
+      } else if (i == start) {
         range.push(
          [timeseries[i][0], timeseries[i][1], timeseries[i][1]], 
         );

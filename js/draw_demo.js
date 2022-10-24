@@ -22,9 +22,13 @@ function generateGraph(e) {
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
   // variables of interest 
-  var today = new Date('2021-02-02')
+  var today = new Date('2021-03-01')
   var year = today.getFullYear()
-  var start = today
+  if (INTERVAL == "daily"){
+    var start = today
+  } else {
+    var start = today.getMonth()+1;
+  }
   var start_int = today.getMonth()+1;
   var model = 'ensemble';
 

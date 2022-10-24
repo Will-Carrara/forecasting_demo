@@ -63,7 +63,6 @@ function fullParty() {
   }());
 };
 
-
 async function addLayers() {
   /* Dynamically add global variable raster layers to map*/
 
@@ -96,7 +95,6 @@ async function addLayers() {
   // low resolution for zoom levels (7-15)
   args['resample'] = 0
   var tiles_low = await requestTiles(url ,args);
-
 
   //map.removeSource('ET')
   //console.log(map.getStyle().layers)
