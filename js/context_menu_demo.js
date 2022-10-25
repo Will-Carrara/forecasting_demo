@@ -37,7 +37,7 @@ window.addEventListener("contextmenu", e => {
     });
 
     etoToggle.addEventListener('click', () => {
-        // set global variable to et0
+        // set global variable to eto
         window.VARIABLE = 'eto'  
 
         // remove other active variables

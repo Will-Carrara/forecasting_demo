@@ -118,10 +118,10 @@ async function addLayers() {
       'visibility': 'visible',
     },
     "paint": {
-      // here we define defaut opacity is zero
+      // define defaut opacity is zero
       "raster-opacity": initial_opacity,
       "raster-opacity-transition": {duration: 2000},
-      }
+    }
   },
   "country-label"
   );
@@ -142,10 +142,10 @@ async function addLayers() {
       'visibility': 'visible',
     },
     "paint": {
-        // here we define defaut opacity is zero
+        // define defaut opacity 
         "raster-opacity": initial_opacity,
         "raster-opacity-transition": {duration: 2000},
-        }
+    }
   },
   "High"
   );

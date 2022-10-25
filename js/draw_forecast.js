@@ -22,9 +22,9 @@ function generateGraph(e) {
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
   // variables of interest 
-  var today = new Date("2022-08-17");
+  var today = new Date();
   var year = today.getFullYear()
-  var month = today.getMonth()+1;
+  var month = today.getMonth();
 
   // FIX THIS MONTHLY
   if (INTERVAL == "daily") {
@@ -37,7 +37,7 @@ function generateGraph(e) {
   async function makeAPICalls(variable, year, start) {
 
       // request url  for forecast
-      const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-0${month}-05&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
+      const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-${month}-05&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
       var forecast = await requestAPI(url, variable);
 
       // plot the data
@@ -58,7 +58,7 @@ function generateGraph(e) {
   // display the modal popup with the graph and loader
   var modal = document.getElementById("graphModal");
   modal.style.display = "block";
-  update_bar(10);
+  update_bar(30);
 }
 
 // add control tools

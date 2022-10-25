@@ -59,7 +59,7 @@ function generateGraph(e) {
   // display the modal popup with the graph and loader
   var modal = document.getElementById("graphModal");
   modal.style.display = "block";
-  update_bar(20);
+  update_bar(30);
 }
 
 // add control tools

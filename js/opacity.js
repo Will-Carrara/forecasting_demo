@@ -1,14 +1,14 @@
 slider.addEventListener('input', (e) => {
-  // Adjust the layers opacity. 
-  map.setPaintProperty(
-    'High',
-    'raster-opacity',
-    parseInt(e.target.value, 10) / 100
-  );
-
-  map.setPaintProperty(
-    'Low',
-    'raster-opacity',
-    parseInt(e.target.value, 10) / 100
-  );
+    // adjust the high res layer opacity
+    map.setPaintProperty(
+      'High',
+      'raster-opacity',
+      parseInt(e.target.value, 10) / 100
+    );
+    // adjust the low res layer opacity
+    map.setPaintProperty(
+      'Low',
+      'raster-opacity',
+      parseInt(e.target.value, 10) / 100
+    );
 });
