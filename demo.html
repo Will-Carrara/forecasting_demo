@@ -103,19 +103,19 @@
 				</div>
 				<i class="uil uil-angle-right"></i>
 				<ul class="share-menu">
-				  <li class="item">
-					<span>January</span>
+				  <li class="item" id="february-toggle">
+					<span>February</span>
 				  </li>
-				  <li class="item active2">
-					<span>Febuary</span>
-				  </li>
-				  <li class="item">
+				  <li class="item active2" id="march-toggle">
 					<span>March</span>
 				  </li>
-				  <li class="item">
+				  <li class="item" id="april-toggle">
 					<span>April</span>
-				  </li><li class="item">
+				  </li><li class="item" id="may-toggle">
 					<span>May</span>
+				  </li>
+				  <li class="item" id="june-toggle">
+					<span>June</span>
 				  </li>
 				</ul>
 			</li>
@@ -171,8 +171,9 @@
 	<script>
 
 		// set GLOBAL defaults
-		window.VARIABLE = 'et'
-     	window.INTERVAL = 'monthly'
+		window.VARIABLE = 'et';
+     	window.INTERVAL = 'monthly';
+		window.MONTH = 3;
 
 		// mapbox token
 		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
@@ -209,7 +210,7 @@
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="js/progress.js"></script>
 	<script type="text/javascript" src="js/nav.js"></script>
-	<script type="text/javascript" src="js/context_menu.js"></script>
+	<script type="text/javascript" src="js/context_menu_demo.js"></script>
 	<script type="text/javascript" src="js/opacity.js"></script>
 </body>
 

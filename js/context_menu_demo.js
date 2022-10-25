@@ -13,6 +13,13 @@ window.addEventListener("contextmenu", e => {
     // get interval options
     const dailyToggle = document.getElementById('daily-toggle');
     const monthlyToggle = document.getElementById('monthly-toggle');
+
+    // get start month toggle
+    const februaryToggle = document.getElementById('february-toggle');
+    const marchToggle = document.getElementById('march-toggle');
+    const aprilToggle = document.getElementById('april-toggle');
+    const mayToggle = document.getElementById('may-toggle');
+    const juneToggle = document.getElementById('june-toggle');
  
     // check for variable change
     etToggle.addEventListener('click', () => {
@@ -42,6 +49,7 @@ window.addEventListener("contextmenu", e => {
         // add active status
         etoToggle.classList.add("active2"); 
     });
+
     etofToggle.addEventListener('click', () => {
         // set global variable to etof
         window.VARIABLE = 'etof'  
@@ -106,6 +114,76 @@ window.addEventListener("contextmenu", e => {
         monthlyToggle.classList.add("active2");          
     });
 
+    // check for month start change
+    februaryToggle.addEventListener('click', () => {
+        // set global month to 2
+        window.MONTH = 2;  
+        
+        // remove other active variables
+        marchToggle.classList.remove("active2");
+        aprilToggle.classList.remove("active2");
+        mayToggle.classList.remove("active2");
+        juneToggle.classList.remove("active2");
+       
+        // add active status
+        februaryToggle.classList.add("active2"); 
+    });
+
+    marchToggle.addEventListener('click', () => {
+        /// set global month to 3
+        window.MONTH = 3;  
+        
+        // remove other active variables
+        februaryToggle.classList.remove("active2");
+        aprilToggle.classList.remove("active2");
+        mayToggle.classList.remove("active2");
+        juneToggle.classList.remove("active2");
+       
+        // add active status
+        marchToggle.classList.add("active2"); 
+    });
+
+    aprilToggle.addEventListener('click', () => {
+        // set global month to 4
+        window.MONTH = 4; 
+        
+        // remove other active variables
+        februaryToggle.classList.remove("active2");
+        marchToggle.classList.remove("active2");
+        mayToggle.classList.remove("active2");
+        juneToggle.classList.remove("active2");
+       
+        // add active status
+        aprilToggle.classList.add("active2"); 
+    });
+
+    mayToggle.addEventListener('click', () => {
+        // set global month to 5
+        window.MONTH = 5; 
+        
+        // remove other active variables
+        februaryToggle.classList.remove("active2");
+        marchToggle.classList.remove("active2");
+        aprilToggle.classList.remove("active2");
+        juneToggle.classList.remove("active2");
+       
+        // add active status
+        mayToggle.classList.add("active2"); 
+    });
+
+    juneToggle.addEventListener('click', () => {
+        // set global month to 6
+        window.MONTH = 6; 
+        
+        // remove other active variables
+        februaryToggle.classList.remove("active2");
+        marchToggle.classList.remove("active2");
+        aprilToggle.classList.remove("active2");
+        maytoggle.classList.remove("active2");
+       
+        // add active status
+        juneToggle.classList.add("active2"); 
+    });
 
     e.preventDefault();
     let x = e.offsetX, y = e.offsetY,

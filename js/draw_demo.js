@@ -22,14 +22,13 @@ function generateGraph(e) {
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
   // variables of interest 
-  var today = new Date('2021-03-01')
+  var today = new Date(`2021-0${MONTH}-01`)
   var year = today.getFullYear()
   if (INTERVAL == "daily"){
     var start = today
   } else {
     var start = today.getMonth()+1;
   }
-  var start_int = today.getMonth()+1;
   var model = 'ensemble';
 
   async function makeAPICalls(variable, year, start) {
@@ -39,7 +38,7 @@ function generateGraph(e) {
       var truth = await requestAPI(url, variable);
 
       // request url  for forecast
-      const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-0${start_int}-02&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
+      const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-0${MONTH}-02&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
       var forecast = await requestAPI(url2, variable);
 
       // plot the data

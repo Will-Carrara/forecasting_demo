@@ -96,29 +96,6 @@
 				  </li>
 				</ul>
 			</li>
-			<li class="item share">
-				<div>
-				  <i class="bx bx-calendar"></i>
-				  <span>Month</span>
-				</div>
-				<i class="uil uil-angle-right"></i>
-				<ul class="share-menu">
-				  <li class="item">
-					<span>January</span>
-				  </li>
-				  <li class="item active2">
-					<span>Febuary</span>
-				  </li>
-				  <li class="item">
-					<span>March</span>
-				  </li>
-				  <li class="item">
-					<span>April</span>
-				  </li><li class="item">
-					<span>May</span>
-				  </li>
-				</ul>
-			</li>
 			<li class="item">
 			  <i class="bx bx-slider-alt"></i>
 			  <span>Opacity</span>
@@ -168,8 +145,9 @@
 	
 	<script>
 		// set GLOBAL defaults
-		window.VARIABLE = 'et'
-     	window.INTERVAL = 'monthly'
+		window.VARIABLE = 'et';
+     	window.INTERVAL = 'monthly';
+		window.MONTH = 3;
 
 		// mapbox token
 		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
@@ -206,7 +184,7 @@
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="js/progress.js"></script>
 	<script type="text/javascript" src="js/nav.js"></script>
-	<script type="text/javascript" src="js/context_menu.js"></script>
+	<script type="text/javascript" src="js/context_menu_forecast.js"></script>
 	<script type="text/javascript" src="js/opacity.js"></script>
 </body>
 
