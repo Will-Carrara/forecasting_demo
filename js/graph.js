@@ -123,9 +123,7 @@ function plotForecast(timeseries, area, variable, start) {
           tooltip: {
             valueSuffix: valueSuffix,
             valueDecimals: 2,
-            // monthly should be '%b, %Y'
-            // daily should be '%b, %e'
-            xDateFormat: '%b, %Y'
+            xDateFormat: xDateFormat
           },
         }
       ],
