@@ -1,5 +1,5 @@
 function plotForecast(timeseries, area, variable, start) {
-    // chang hover pop up for daily
+    // change hover pop up for daily
     if (INTERVAL == "daily") {
       var xDateFormat = '%b, %e'
     } else {
