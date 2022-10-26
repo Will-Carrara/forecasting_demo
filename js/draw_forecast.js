@@ -25,7 +25,7 @@ function generateGraph(e) {
   var today = new Date();
   var end_date = today.toISOString().split('T')[0];
   var year = today.getFullYear()
-  var month = today.getMonth() +1;
+  var month = today.getMonth();
   
 
   // FIX THIS MONTHLY

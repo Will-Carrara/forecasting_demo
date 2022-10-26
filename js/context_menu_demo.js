@@ -179,7 +179,7 @@ window.addEventListener("contextmenu", e => {
         februaryToggle.classList.remove("active2");
         marchToggle.classList.remove("active2");
         aprilToggle.classList.remove("active2");
-        maytoggle.classList.remove("active2");
+        mayToggle.classList.remove("active2");
        
         // add active status
         juneToggle.classList.add("active2"); 
