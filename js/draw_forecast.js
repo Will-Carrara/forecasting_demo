@@ -23,8 +23,10 @@ function generateGraph(e) {
 
   // variables of interest 
   var today = new Date();
+  var end_date = today.toISOString().split('T')[0];
   var year = today.getFullYear()
-  var month = today.getMonth();
+  var month = today.getMonth() +1;
+  
 
   // FIX THIS MONTHLY
   if (INTERVAL == "daily") {
@@ -37,8 +39,9 @@ function generateGraph(e) {
   async function makeAPICalls(variable, year, start) {
 
       // request url  for forecast
-      const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-${month}-05&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
+      const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${end_date}&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
       var forecast = await requestAPI(url, variable);
+      console.log(url)
 
       // plot the data
       var chart = plotForecast(forecast, area, variable, start)
