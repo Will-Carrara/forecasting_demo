@@ -32,7 +32,7 @@ function generateGraph(e) {
   if (INTERVAL == "daily") {
     var start = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
   } else {
-    var start = month
+    var start = month -1
   }
   var model = 'ensemble';
 
@@ -41,8 +41,7 @@ function generateGraph(e) {
       // request url  for forecast
       const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${end_date}&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
       var forecast = await requestAPI(url, variable);
-      console.log(url)
-
+    
       // plot the data
       var chart = plotForecast(forecast, area, variable, start)
 
