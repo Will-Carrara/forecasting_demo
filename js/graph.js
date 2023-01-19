@@ -199,7 +199,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
       }
     },
     title: {
-      text: `2021 ${fullName}`,
+      text: `2022 ${fullName}`,
     },
     subtitle: {
       text: `OpenET Ensemble (${parseFloat(area).toLocaleString()} Acres)`,

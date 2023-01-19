@@ -107,7 +107,6 @@ window.addEventListener("contextmenu", e => {
         monthlyToggle.classList.add("active2");          
     });
 
-
     e.preventDefault();
     let x = e.offsetX, y = e.offsetY,
     winWidth = window.innerWidth,

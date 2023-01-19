@@ -21,8 +21,8 @@ def call_warp():
     args = {
         # security options
         'admin_key': 'hello',
-        # temporal options            
-        'end_date' : '2022-08-01',                  
+        # temporal options               
+        'end_date' : '2023-01-18',            
         'interval' : 'monthly',   
         # spatial options
         'lon' : '-120.34557095073147',        
