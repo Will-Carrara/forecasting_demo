@@ -21,7 +21,7 @@ function generateGraph(e) {
   // convert m2 to acres
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
-  // variables of interest 
+  // variables of interest
   var today = new Date(`2022-0${MONTH}-01`)
   var year = today.getFullYear()
   if (INTERVAL == "daily"){
@@ -32,14 +32,47 @@ function generateGraph(e) {
   var model = 'ensemble';
 
   async function makeAPICalls(variable, year, start) {
-      
+
       // request url for ground truth
-      const url = `https://openet-raster-api.org/timeseries/point?start_date=${year}-01-01&end_date=${year}-12-31&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&provisional=true&admin_key=hello`;
-      var truth = await requestAPI(url, variable);
+      const url = 'http://localhost:8080/raster/timeseries/point';
+      var args = {
+        "date_range": [
+          `${year}-01-01`,
+          `${year}-12-31`
+        ],
+        "file_format": "json",
+        "geometry": [
+          lon,
+          lat
+        ],
+        "interval": INTERVAL,
+        "model": model,
+        "reference_et": "gridMET",
+        "units": "mm",
+        "variable": variable
+      }
+      var truth = await requestAPI(url, args, variable);
 
       // request url  for forecast
-      const url2 = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${year}-0${MONTH}-02&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
-      var forecast = await requestAPI(url2, variable);
+      const url2 = 'http://localhost:8080/experimental/raster/timeseries/forecasting/seasonal';
+      var args2 = {
+        "date_range": [
+          `2016-01-01`,
+         `${year}-0${MONTH}-02`
+        ],
+        "file_format": "json",
+        "geometry": [
+          lon,
+          lat
+        ],
+        "interval": INTERVAL,
+        "model": model,
+        "reference_et": "gridMET",
+        "units": "mm",
+        "variable": variable
+      }
+
+      var forecast = await requestAPI(url2, args2, variable);
 
       // plot the data
       var chart = plotAccuracy(truth, forecast, area, variable, start)

@@ -104,7 +104,7 @@
 		  </ul>
 		</div>
 	</div>
-	
+
 	<!-- Nav Menu -->
 	<body id="body-pd">
 		<div class="l-navbar" id="nav-bar">
@@ -119,11 +119,11 @@
             			<a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
 					  </div>
 				</div>
-				<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
+				<a href="index.html" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
 			</nav>
 		</div>
 	</body>
-	
+
 	<!--Container Main -->
 	<div class="height-100 bg-light">
 		<!-- Map -->
@@ -142,11 +142,12 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
 		// set GLOBAL defaults
 		window.VARIABLE = 'et';
      	window.INTERVAL = 'daily';
+		 window.API_KEY = localStorage.getItem("passwordField");
 
 		// mapbox token
 		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";

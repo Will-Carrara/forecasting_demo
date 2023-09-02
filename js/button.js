@@ -67,29 +67,30 @@ async function addLayers() {
   /* Dynamically add global variable raster layers to map*/
 
   // request url for ground truth
-  const url = 'https://openet-raster-api.org/visual/tile_id?admin_key=hello';
+  const url = 'http://localhost:8080/raster/visual/tile_cache';
 
   // starting opacity
   var initial_opacity = .56
 
   // request tiles for all of CONUS
   var args = {
-    "start_date": "2021-01-01",
-    "end_date": "2021-12-31",
-    "geometry": [
-      -126.69800563131702, 49.56739654380486,
-      -126.69800563131702, 25.1046857170018,
-      -64.47144313131702, 25.1046857170018,
-      -64.47144313131702, 49.56739654380486
-    ],
-    "model": "ensemble",
-    "variable": VARIABLE,
-    "ref_et_source": "gridmet",
-    "pixel_aggregation": "sum",
-    "units": "english",
-    "resample": 5,
-    "provisional": "true",
-    "visual_parameters": master['monthly'][VARIABLE]['tile_palette']
+      "date_range": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "geometry": [
+        -126.69800563131702, 49.56739654380486,
+        -126.69800563131702, 25.1046857170018,
+        -64.47144313131702, 25.1046857170018,
+        -64.47144313131702, 49.56739654380486
+      ],
+      "gradient": master['monthly'][VARIABLE]['gradient'],
+      "model": "Ensemble",
+      "reducer": "sum",
+      "reference_et": "gridMET",
+      "resample": 10,
+      "units": "in",
+      "variable": VARIABLE
   }
 
   // high resolution for zoom levels (5-6)
@@ -118,7 +119,7 @@ async function addLayers() {
       'visibility': 'visible',
     },
     "paint": {
-      // define defaut opacity is zero
+      // define default opacity is zero
       "raster-opacity": initial_opacity,
       "raster-opacity-transition": {duration: 2000},
     }
@@ -142,7 +143,7 @@ async function addLayers() {
       'visibility': 'visible',
     },
     "paint": {
-        // define defaut opacity 
+        // define defaut opacity
         "raster-opacity": initial_opacity,
         "raster-opacity-transition": {duration: 2000},
     }

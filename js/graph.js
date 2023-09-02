@@ -44,20 +44,20 @@ function plotForecast(timeseries, area, variable, start) {
     for (i = 0; i < timeseries.length; i++) {
       if (i < start) {
         range.push([timeseries[i][0], null, null]);
-      } else if (i == start) {
-        range.push(
-         [timeseries[i][0], timeseries[i][1], timeseries[i][1]], 
+     } else if (i == start) {
+       range.push(
+         [timeseries[i][0], timeseries[i][1], timeseries[i][1]],
         );
       } else {
         range.push(
           [timeseries[i][0], parseFloat(timeseries[i][1] * 0.75), parseFloat(timeseries[i][1] * 1.25)],
         );
       };
-    };
-  
-    var chart = new Highcharts.chart({
+    }
+
+    var chart = Highcharts.chart("container1", {
       chart: {
-        renderTo: "container1",
+        //renderTo: "container1",
         zoomType: 'x',
         scrollablePlotArea: {
             minWidth: 600,
@@ -82,7 +82,7 @@ function plotForecast(timeseries, area, variable, start) {
       },
       xAxis: {
         type: 'datetime',
-        tickInterval: 30 * 24 * 3600 * 1000, // one month 
+        tickInterval: 30 * 24 * 3600 * 1000, // one month
         labels: {
           formatter: function() {
             return Highcharts.dateFormat('%b', this.value);
@@ -113,7 +113,7 @@ function plotForecast(timeseries, area, variable, start) {
           data: range,
           type: "arearange",
           lineWidth: 0,
-          linkedTo: ":previous",
+         // linkedTo: ":previous",
           color: "#BEBEBE", // light grey
           fillOpacity: 0.3,
           zIndex: 0,
@@ -146,7 +146,7 @@ function plotForecast(timeseries, area, variable, start) {
     });
     return chart;
 };
-  
+
 function plotAccuracy(truth, forecast, area, variable, start) {
 
   // chang hover pop up for daily
@@ -155,7 +155,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
   } else {
     var xDateFormat = '%b, %Y'
   }
-  
+
   // get chart params
   if (variable == 'et') {
     var fullName = 'Evapotranspiration';
@@ -187,11 +187,11 @@ function plotAccuracy(truth, forecast, area, variable, start) {
     var softMax = 1;
     var yAxisText = `${subName}`;
     var valueSuffix = '';
-  }; 
+  };
 
-  var chart = new Highcharts.chart({
+  var chart = Highcharts.chart("container1", {
     chart: {
-      renderTo: "container1",
+      //renderTo: "container1",
       zoomType: 'x',
       scrollablePlotArea: {
           minWidth: 600,
@@ -216,7 +216,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
     },
     xAxis: {
       type: 'datetime',
-      tickInterval: 30 * 24 * 3600 * 1000, // one month 
+      tickInterval: 30 * 24 * 3600 * 1000, // one month
       labels: {
         formatter: function() {
           return Highcharts.dateFormat('%b', this.value);
@@ -228,6 +228,7 @@ function plotAccuracy(truth, forecast, area, variable, start) {
       {
         name: "Forecasted",
         data: forecast,
+        color: "#36454f",
         zoneAxis: "x",
         zones: [
           {
@@ -281,4 +282,3 @@ pointFormatter: function() {
 return this.point.key + this.series.name + ": " + this.y + "<br/>(" + parseFloat(this.y * 100 / this.series.chart.series[1].data[this.x].y).toFixed(0) + "%)"
 }
 */
-  
