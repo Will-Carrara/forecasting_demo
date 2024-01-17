@@ -28,7 +28,7 @@ function generateGraph(e) {
 
   // FIX THIS MONTHLY
   if (INTERVAL == "daily") {
-    var start = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    var start = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) -2
   } else {
     var start = month -1
   }
@@ -36,9 +36,6 @@ function generateGraph(e) {
 
   async function makeAPICalls(variable, start) {
 
-      // request url  for forecast
-      //const url = `https://openet-raster-api.org/experimental/forecast/warping?end_date=${end_date}&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
-      //const url = `http://127.0.0.1:8000/experimental/forecast/warping?end_date=${end_date}&interval=${INTERVAL}&lon=${lon}&lat=${lat}&model=${model}&variable=${variable}&ref_et_source=gridmet&units=metric&output_file_format=json&admin_key=hello`;
       // request url  for forecast
       const url = 'http://localhost:8080/experimental/raster/timeseries/forecasting/seasonal';
       var args = {
@@ -55,7 +52,8 @@ function generateGraph(e) {
         "model": model,
         "reference_et": "gridMET",
         "units": "mm",
-        "variable": variable
+        "variable": variable,
+        "best_effort" : false
       }
 
       var forecast = await requestAPI(url, args, variable);
@@ -72,7 +70,7 @@ function generateGraph(e) {
       };
   }
 
-  // retirve and plot data
+  // retrieve and plot data
   makeAPICalls(VARIABLE, start)
 
   // display the modal popup with the graph and loader

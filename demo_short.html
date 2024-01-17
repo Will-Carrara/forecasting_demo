@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="css/progress_bar.css" />
 	<!-- Nav Bar -->
 	<link rel="stylesheet" href="css/nav.css" />
-	<!-- Opacity Slider -->
+	<!-- Opscity Slider -->
 	<link rel="stylesheet" href="css/opacity.css" />
 	<!-- Graph -->
 	<link rel="stylesheet" href="css/chart.css" type="text/css" />
@@ -88,11 +88,35 @@
 				</div>
 				<i class="uil uil-angle-right"></i>
 				<ul class="share-menu">
-				  <li class="item active2" id="daily-toggle">
+				  <li class="item" id="daily-toggle">
 					<span>Daily</span>
 				  </li>
-				  <li class="item" id="monthly-toggle">
+				  <li class="item active2" id="monthly-toggle">
 					<span>Monthly</span>
+				  </li>
+				</ul>
+			</li>
+			<li class="item share">
+				<div>
+				  <i class="bx bx-calendar"></i>
+				  <span>Month</span>
+				</div>
+				<i class="uil uil-angle-right"></i>
+				<ul class="share-menu">
+				  <li class="item" id="february-toggle">
+					<span>February</span>
+				  </li>
+				  <li class="item active2" id="march-toggle">
+					<span>March</span>
+				  </li>
+				  <li class="item" id="april-toggle">
+					<span>April</span>
+				  </li>
+				  <li class="item" id="may-toggle">
+					<span>May</span>
+				  </li>
+				  <li class="item" id="june-toggle">
+					<span>June</span>
 				  </li>
 				</ul>
 			</li>
@@ -114,14 +138,15 @@
           			  <div class="nav_list">
 						<a href="demo.html" class="nav_link"> <i class='bx bx-desktop nav_icon'></i> <span class="nav_name">Long 2023</span> </a>
 						<a href="forecast_short.html" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Short 2024</span> </a>
-						<a href="forecast.html" class="nav_link active"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Long 2024</span> </a>
-						<a href="demo_short.html" class="nav_link"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Short 2023</span> </a>
+						<a href="forecast.html" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Long 2024</span> </a>
+						<a href="demo_short.html" class="nav_link active"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Short 2023</span> </a>
             			<a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
 					  </div>
 				</div>
 				<a href="index.html" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
 			</nav>
 		</div>
+
 	</body>
 
 	<!--Container Main -->
@@ -144,22 +169,25 @@
 	</div>
 
 	<script>
+
 		// set GLOBAL defaults
 		window.VARIABLE = 'et';
-     	window.INTERVAL = 'daily';
-		 window.API_KEY = localStorage.getItem("passwordField");
+     	window.INTERVAL = 'monthly';
+		window.MONTH = 3;
+		window.API_KEY = localStorage.getItem("passwordField");
 
 		// mapbox token
 		mapboxgl.accessToken = "pk.eyJ1IjoibG91aXNyb3BhcnMiLCJhIjoiY2xqMncycmp1MTh0YzNncWE3bmc0d2I0ZyJ9.1SNjIgKaQYgpoVSVPvaSjg";
+
 		// base map
 		var map = new mapboxgl.Map({
-            container: "map",
-            style: "mapbox://styles/mapbox/satellite-streets-v11",
-            center: [-120.393, 36.937],
-            zoom: 5,
-            maxZoom: 15,
-            minZoom: 5,
-        });
+			container: "map",
+			style: "mapbox://styles/mapbox/satellite-streets-v12",
+			center: [-120.23690659889124, 37.207076244848274],
+			zoom: 15,
+			maxZoom: 15,
+			minZoom: 5,
+		});
 
 		// add search bar
 		map.addControl(new MapboxGeocoder({
@@ -178,13 +206,13 @@
 	</script>
 
 	<!-- Map Functions -->
-	<script type="text/javascript" src="js/draw_forecast.js"></script>
+	<script type="text/javascript" src="js/draw_demo_short.js"></script>
 	<script type="text/javascript" src="js/polygons.js"></script>
 	<script type="text/javascript" src="js/api.js"></script>
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="js/progress.js"></script>
 	<script type="text/javascript" src="js/nav.js"></script>
-	<script type="text/javascript" src="js/context_menu_forecast.js"></script>
+	<script type="text/javascript" src="js/context_menu_demo.js"></script>
 	<script type="text/javascript" src="js/opacity.js"></script>
 </body>
 

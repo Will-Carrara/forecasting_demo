@@ -1,219 +1,210 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <!-- Site Title -->
+    <title>Forecasting Demo</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- Master Controls -->
+    <script type="text/javascript" src="admin/variables.js"></script>
+    <!-- Map Imports -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.2/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.js'></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <!-- Area Calculations -->
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <!-- Graphing -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <!-- API Handling -->
+    <!-- Buttons -->
+    <script type="text/javascript" src="js/button.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <!-- Loading Bar -->
+    <link rel="stylesheet" href="css/progress_bar.css" />
+    <!-- Nav Bar -->
+    <link rel="stylesheet" href="css/nav.css" />
+    <!-- Opscity Slider -->
+    <link rel="stylesheet" href="css/opacity.css" />
+    <!-- Graph -->
+    <link rel="stylesheet" href="css/chart.css" type="text/css" />
+    <!-- Context Menu -->
+    <link rel="stylesheet" href="css/context.css" type="text/css" />
+    <!-- Button -->
+    <link rel="stylesheet" href="css/buttons.css" type="text/css" />
+    <!-- Map Styling -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v3.0.0-beta.2/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.3/mapbox-gl-draw.css" type="text/css" />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css" />
+  </head>
+  <body>
+    <!-- Context Menu -->
+    <div class="wrapper">
+      <div class="content">
+        <ul class="menu">
+          <div class="setting">
+            <li class="item">
+              <i class="bx bx-cog"></i>
+              <span>Data Options</span>
+            </li>
+          </div>
+          <li class="item share">
+            <div>
+              <i class="bx bx-layer"></i>
+              <span>Variables</span>
+            </div>
+            <i class="uil uil-angle-right"></i>
+            <ul class="share-menu">
+              <li class="item active2" id="et-toggle">
+                <span>ET</span>
+              </li>
+              <li class="item" id="eto-toggle">
+                <span>ETo</span>
+              </li>
+              <li class="item" id="etof-toggle">
+                <span>ETof</span>
+              </li>
+              <li class="item" id="pr-toggle">
+                <span>PR</span>
+              </li>
+              <li class="item" id="ndvi-toggle">
+                <span>NDVI</span>
+              </li>
+            </ul>
+          </li>
+          <li class="item share">
+            <div>
+              <i class="bx bx-stopwatch"></i>
+              <span>Interval</span>
+            </div>
+            <i class="uil uil-angle-right"></i>
+            <ul class="share-menu">
+              <li class="item" id="daily-toggle">
+                <span>Daily</span>
+              </li>
+              <li class="item active2" id="monthly-toggle">
+                <span>Monthly</span>
+              </li>
+            </ul>
+          </li>
+          <li class="item share">
+            <div>
+              <i class="bx bx-calendar"></i>
+              <span>Month</span>
+            </div>
+            <i class="uil uil-angle-right"></i>
+            <ul class="share-menu">
+              <li class="item" id="february-toggle">
+                <span>February</span>
+              </li>
+              <li class="item active2" id="march-toggle">
+                <span>March</span>
+              </li>
+              <li class="item" id="april-toggle">
+                <span>April</span>
+              </li>
+              <li class="item" id="may-toggle">
+                <span>May</span>
+              </li>
+              <li class="item" id="june-toggle">
+                <span>June</span>
+              </li>
+            </ul>
+          </li>
+          <li class="item">
+            <i class="bx bx-slider-alt"></i>
+            <span>Opacity</span>
+            <input class="slider" id="slider" type="range" min="0" max="100" step="0" value="50">
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Nav Menu -->
+    <body id="body-pd">
+      <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+          <div>
+            <a href="#" class="nav_logo" id="header"> <i class='bx bx-menu nav_logo-icon' id='header-toggle'></i> <span class="nav_logo-name">Navigation</span> </a>
+            <div class="nav_list">
+              <a href="demo.html" class="nav_link active"> <i class='bx bx-desktop nav_icon'></i> <span class="nav_name">Long 2023</span> </a>
+              <a href="forecast_short.html" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Short 2024</span> </a>
+              <a href="forecast.html" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Long 2024</span> </a>
+              <a href="demo_short.html" class="nav_link"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Short 2023</span> </a>
+              <a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
+            </div>
+          </div>
+          <a href="index.html" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
+        </nav>
+      </div>
+  </body>
+  <!--Container Main -->
+  <div class="height-100 bg-light">
+    <!-- Map -->
+    <div id="map"></div>
+    <!-- Populate Button -->
+    <button class="button button1" onclick="addLayers(); smallParty();">Populate Map</button>
+    <!-- Modal Graph Popup-->
+    <div id="graphModal" class="modal">
+      <div class="modal-content">
+        <!-- Loading Bar -->
+        <div id="Progress_Status">
+          <div id="myprogressBar"></div>
+        </div>
+        <!-- Graph-->
+        <div id="container1"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // set GLOBAL defaults
+    window.VARIABLE = 'et';
+       	window.INTERVAL = 'monthly';
+    window.MONTH = 3;
+    window.API_KEY = localStorage.getItem("passwordField");
 
-<head>
-	<!-- Site Title -->
-	<title>Forecasting Demo</title>
-	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-	<!-- Master Controls -->
-	<script type="text/javascript" src="admin/variables.js"></script>
-	<!-- Map Imports -->
-	<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
-	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js"></script>
-	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-	<!-- Area Calculations -->
-	<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-	<!-- Graphing -->
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-	<script src="https://code.highcharts.com/highcharts-more.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
-	<!-- API Handling -->
-	<!-- Buttons -->
-	<script type="text/javascript" src="js/button.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
-	<!-- Loading Bar -->
-	<link rel="stylesheet" href="css/progress_bar.css" />
-	<!-- Nav Bar -->
-	<link rel="stylesheet" href="css/nav.css" />
-	<!-- Opscity Slider -->
-	<link rel="stylesheet" href="css/opacity.css" />
-	<!-- Graph -->
-	<link rel="stylesheet" href="css/chart.css" type="text/css" />
-	<!-- Context Menu -->
-	<link rel="stylesheet" href="css/context.css" type="text/css" />
-	<!-- Button -->
-	<link rel="stylesheet" href="css/buttons.css" type="text/css" />
-	<!-- Map Styling -->
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" type="text/css" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css" type="text/css" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css" />
-</head>
+    // mapbox token
+    mapboxgl.accessToken = "pk.eyJ1IjoibG91aXNyb3BhcnMiLCJhIjoiY2xqMncycmp1MTh0YzNncWE3bmc0d2I0ZyJ9.1SNjIgKaQYgpoVSVPvaSjg";
 
-<body>
-	<!-- Context Menu -->
-	<div class="wrapper">
-		<div class="content">
-		  <ul class="menu">
-			<div class="setting">
-				<li class="item">
-				<i class="bx bx-cog"></i>
-				<span>Data Options</span>
-				</li>
-			</div>
-			<li class="item share">
-			  <div>
-				<i class="bx bx-layer"></i>
-				<span>Variables</span>
-			  </div>
-			  <i class="uil uil-angle-right"></i>
-			  <ul class="share-menu">
-				<li class="item active2" id="et-toggle">
-				  <span>ET</span>
-				</li>
-				<li class="item" id="eto-toggle">
-				  <span>ETo</span>
-				</li>
-				<li class="item" id="etof-toggle">
-				  <span>ETof</span>
-				</li>
-				<li class="item" id="pr-toggle">
-				  <span>PR</span>
-				</li>
-				<li class="item" id="ndvi-toggle">
-					<span>NDVI</span>
-				  </li>
-			  </ul>
-			</li>
-			<li class="item share">
-				<div>
-				  <i class="bx bx-stopwatch"></i>
-				  <span>Interval</span>
-				</div>
-				<i class="uil uil-angle-right"></i>
-				<ul class="share-menu">
-				  <li class="item" id="daily-toggle">
-					<span>Daily</span>
-				  </li>
-				  <li class="item active2" id="monthly-toggle">
-					<span>Monthly</span>
-				  </li>
-				</ul>
-			</li>
-			<li class="item share">
-				<div>
-				  <i class="bx bx-calendar"></i>
-				  <span>Month</span>
-				</div>
-				<i class="uil uil-angle-right"></i>
-				<ul class="share-menu">
-				  <li class="item" id="february-toggle">
-					<span>February</span>
-				  </li>
-				  <li class="item active2" id="march-toggle">
-					<span>March</span>
-				  </li>
-				  <li class="item" id="april-toggle">
-					<span>April</span>
-				  </li>
-				  <li class="item" id="may-toggle">
-					<span>May</span>
-				  </li>
-				  <li class="item" id="june-toggle">
-					<span>June</span>
-				  </li>
-				</ul>
-			</li>
-			<li class="item">
-			  <i class="bx bx-slider-alt"></i>
-			  <span>Opacity</span>
-			  <input class="slider" id="slider" type="range" min="0" max="100" step="0" value="50">
-			</li>
-		  </ul>
-		</div>
-	</div>
+    // base map
+    var map = new mapboxgl.Map({
+    	container: "map",
+    	style: "mapbox://styles/mapbox/satellite-streets-v12",
+    	center: [-120.23690659889124, 37.207076244848274],
+    	zoom: 15,
+    	maxZoom: 15,
+    	minZoom: 5,
+    });
 
-	<!-- Nav Menu -->
-	<body id="body-pd">
-		<div class="l-navbar" id="nav-bar">
-			<nav class="nav">
-				<div>
-					<a href="#" class="nav_logo" id="header"> <i class='bx bx-menu nav_logo-icon' id='header-toggle'></i> <span class="nav_logo-name">Navigation</span> </a>
-          			  <div class="nav_list">
-						<a href="demo.html" class="nav_link active"> <i class='bx bx-desktop nav_icon'></i> <span class="nav_name">Demo</span> </a>
-						<a href="index.html" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Account</span> </a>
-						<a href="forecast.html" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
-						<a href="#" class="nav_link"> <i class='bx bx-download nav_icon'></i> <span class="nav_name">Download</span> </a>
-            			<a href="#" class="nav_link"> <i class='bx bx-chat nav_icon'></i> <span class="nav_name">Contact</span> </a>
-					  </div>
-				</div>
-				<a href="index.html" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Sign Out</span> </a>
-			</nav>
-		</div>
+    // add search bar
+    map.addControl(new MapboxGeocoder({
+    	accessToken: mapboxgl.accessToken,
+    	mapboxgl: mapboxgl
+    }), 'top-left');
 
-	</body>
+    // add layer controls
+    map.addControl(new mapboxgl.NavigationControl());
+    // display scale ruler
+    map.addControl(new mapboxgl.ScaleControl({
+    	position: 'bottom-left',
+    	unit: 'imperial'
+    }));
 
-	<!--Container Main -->
-	<div class="height-100 bg-light">
-		<!-- Map -->
-		<div id="map"></div>
-		<!-- Populate Button -->
-		<button class="button button1" onclick="addLayers(); smallParty();">Populate Map</button>
-		<!-- Modal Graph Popup-->
-		<div id="graphModal" class="modal">
-			<div class="modal-content">
-				<!-- Loading Bar -->
-				<div id="Progress_Status">
-					<div id="myprogressBar"></div>
-				</div>
-				<!-- Graph-->
-				<div id="container1"></div>
-			</div>
-		</div>
-	</div>
-
-	<script>
-
-		// set GLOBAL defaults
-		window.VARIABLE = 'et';
-     	window.INTERVAL = 'monthly';
-		window.MONTH = 3;
-		window.API_KEY = localStorage.getItem("passwordField");
-
-		// mapbox token
-		mapboxgl.accessToken = "pk.eyJ1IjoibW9yZ2Vua2FmZmVlIiwiYSI6IjIzcmN0NlkifQ.0LRTNgCc-envt9d5MzR75w";
-
-		// base map
-		var map = new mapboxgl.Map({
-			container: "map",
-			style: "mapbox://styles/mapbox/satellite-streets-v12",
-			center: [-120.23690659889124, 37.207076244848274],
-			zoom: 15,
-			maxZoom: 15,
-			minZoom: 5,
-		});
-
-		// add search bar
-		map.addControl(new MapboxGeocoder({
-			accessToken: mapboxgl.accessToken,
-			mapboxgl: mapboxgl
-		}), 'top-left');
-
-		// add layer controls
-		map.addControl(new mapboxgl.NavigationControl());
-		// display scale ruler
-		map.addControl(new mapboxgl.ScaleControl({
-			position: 'bottom-left',
-			unit: 'imperial'
-		}));
-
-	</script>
-
-	<!-- Map Functions -->
-	<script type="text/javascript" src="js/draw_demo.js"></script>
-	<script type="text/javascript" src="js/polygons.js"></script>
-	<script type="text/javascript" src="js/api.js"></script>
-	<script type="text/javascript" src="js/graph.js"></script>
-	<script type="text/javascript" src="js/progress.js"></script>
-	<script type="text/javascript" src="js/nav.js"></script>
-	<script type="text/javascript" src="js/context_menu_demo.js"></script>
-	<script type="text/javascript" src="js/opacity.js"></script>
-</body>
-
+  </script>
+  <!-- Map Functions -->
+  <script type="text/javascript" src="js/draw_demo.js"></script>
+  <script type="text/javascript" src="js/polygons.js"></script>
+  <script type="text/javascript" src="js/api.js"></script>
+  <script type="text/javascript" src="js/graph.js"></script>
+  <script type="text/javascript" src="js/progress.js"></script>
+  <script type="text/javascript" src="js/nav.js"></script>
+  <script type="text/javascript" src="js/context_menu_demo.js"></script>
+  <script type="text/javascript" src="js/opacity.js"></script>
+  </body>
 </html>

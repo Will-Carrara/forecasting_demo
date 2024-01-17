@@ -26,10 +26,16 @@ function generateGraph(e) {
   var year = today.getFullYear()
   if (INTERVAL == "daily"){
     var start = today
+    var steps = 14
+    var sd = new Date(`2023-01-01`)
+
   } else {
     var start = today.getMonth()+1;
+    var steps = 12-MONTH+1
+    var sd = `2016-01-01`
   }
   var model = 'ensemble';
+
 
   async function makeAPICalls(variable, year, start) {
 
@@ -54,12 +60,15 @@ function generateGraph(e) {
       var truth = await requestAPI(url, args, variable);
 
       // request url  for forecast
-      const url2 = 'http://localhost:8080/experimental/raster/timeseries/forecasting/seasonal';
+      const url2 = 'http://localhost:8080/experimental/raster/timeseries/forecasting/fret';
       var args2 = {
         "date_range": [
-          `2016-01-01`,
+          sd,
          `${year}-0${MONTH}-02`
         ],
+        "generations": 3,
+        "speed": "fast_parallel",
+        "steps": steps,
         "file_format": "json",
         "geometry": [
           lon,
@@ -69,8 +78,7 @@ function generateGraph(e) {
         "model": model,
         "reference_et": "gridMET",
         "units": "mm",
-        "variable": variable,
-        "best_effort" : false
+        "variable": variable
       }
 
       var forecast = await requestAPI(url2, args2, variable);

@@ -22,58 +22,69 @@ function generateGraph(e) {
   let area = (turf.area(polygon) * 0.000247105).toFixed(2);
 
   // variables of interest
-  var today = new Date(`2023-0${MONTH}-01`)
-  var year = today.getFullYear()
-  if (INTERVAL == "daily"){
-    var start = today
+  var today = new Date();
+  var end_date = today.toISOString().split('T')[0]
+  var month = today.getMonth();
+
+  // FIX THIS MONTHLY
+  if (INTERVAL == "daily") {
+    var start = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24) - 2
+    var steps = 14
+    var sd = `2024-01-17`
+
   } else {
-    var start = today.getMonth()+1;
+    var start = month
+    var steps = 12-month+1
+    var sd = `2016-01-01`
   }
   var model = 'ensemble';
 
-  async function makeAPICalls(variable, year, start) {
+  async function makeAPICalls(variable, start) {
 
-      // request url for ground truth
-      const url = 'http://localhost:8080/raster/timeseries/point';
+     // request url for ground truth
+     const url1 = 'http://localhost:8080/raster/timeseries/point';
+     var args = {
+       "date_range": [
+         `2024-01-01`,
+         `2024-01-16`
+       ],
+       "file_format": "json",
+       "geometry": [
+         lon,
+         lat
+       ],
+       "interval": INTERVAL,
+       "model": model,
+       "reference_et": "gridMET",
+       "units": "mm",
+       "variable": variable
+     }
+
+     var truth = await requestAPI(url1, args, variable);
+
+      // request url  for forecast
+      const url = 'http://localhost:8080/experimental/raster/timeseries/forecasting/fret';
       var args = {
         "date_range": [
-          `${year}-01-01`,
-          `${year}-12-31`
+          sd,
+          end_date
         ],
+        //"generations": 3,
+       // "speed": "fast_parallel",
+       // "steps": steps,
         "file_format": "json",
         "geometry": [
           lon,
           lat
         ],
-        "interval": INTERVAL,
+        //"interval": INTERVAL,
         "model": model,
         "reference_et": "gridMET",
         "units": "mm",
         "variable": variable
       }
-      var truth = await requestAPI(url, args, variable);
 
-      // request url  for forecast
-      const url2 = 'http://localhost:8080/experimental/raster/timeseries/forecasting/seasonal';
-      var args2 = {
-        "date_range": [
-          `2016-01-01`,
-         `${year}-0${MONTH}-02`
-        ],
-        "file_format": "json",
-        "geometry": [
-          lon,
-          lat
-        ],
-        "interval": INTERVAL,
-        "model": model,
-        "reference_et": "gridMET",
-        "units": "mm",
-        "variable": variable,
-        "best_effort" : false
-      }
-
-      var forecast = await requestAPI(url2, args2, variable);
+      var forecast = await requestAPI(url, args, variable);
 
       // plot the data
       var chart = plotAccuracy(truth, forecast, area, variable, start)
@@ -88,7 +99,7 @@ function generateGraph(e) {
   }
 
   // retrieve and plot data
-  makeAPICalls(VARIABLE, year, start)
+  makeAPICalls(VARIABLE, start)
 
   // display the modal popup with the graph and loader
   var modal = document.getElementById("graphModal");
